@@ -1,0 +1,26 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+div{
+}
+
+#map{
+	width: 1024px;
+	height: 768px;	
+}
+
+#chart{
+	width: 1024px;
+	height: 768px;
+	display: none;
+}
+
+.menu{
+	position: fixed;
+	left : 20px;
+	bottom: 20px;
+	width: 250px;
+	height: 250px;
+}
