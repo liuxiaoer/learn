@@ -30,6 +30,22 @@ function drawInitial(svg) {
 	svg.line(g, 125 + d0, 125 + d0, 125 + d1, 125 + d1);
 	// g = svg.group({transform :
 	// 'translate(135,45)',fill:'rgba(204,204,204,.5)'});
+	
+	
+	g = svg.group();
+	var defs = svg.defs(g);
+	radialGradient = svg.radialGradient(defs,{
+		cx : 125,
+		cy : 125,
+		fx : 125,
+		fy : 125,
+		gradientUnits : 'userSpaceOnUse',
+		id : 'Gradient02',
+		r : 100
+	});
+	svg.stop(radialGradient,{offset : '66.7%','stop-color':'#ccc'})
+	svg.stop(radialGradient,{offset : '100%','stop-color':'#ccc'})
+	
 
 	var setting = "M32,20v-8h-4.734c-0.141-0.391-0.289-0.771-0.469-1.146l3.344-3.339l-5.656-5.661l-3.344,3.344"
 			+ "C20.777,5.026,20.375,4.933,20,4.792V0h-8v4.792c-0.383,0.141-0.781,0.234-1.145,0.406l-3.34-3.344l-5.66,5.661l3.34,3.339"
