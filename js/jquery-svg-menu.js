@@ -34,17 +34,11 @@ function drawInitial(svg) {
 	
 	g = svg.group();
 	var defs = svg.defs(g);
-	radialGradient = svg.radialGradient(defs,{
-		cx : 125,
-		cy : 125,
-		fx : 125,
-		fy : 125,
-		gradientUnits : 'userSpaceOnUse',
-		id : 'Gradient02',
-		r : 100
+	radialGradient = svg.radialGradient(defs,'Gradient02',[
+	svg.stop({offset : '66.7%','stop-color':'#ccc'}),
+	svg.stop({offset : '100%','stop-color':'#ccc'})],125,125,100,125,125,{
+		gradientUnits : 'userSpaceOnUse'
 	});
-	svg.stop(radialGradient,{offset : '66.7%','stop-color':'#ccc'})
-	svg.stop(radialGradient,{offset : '100%','stop-color':'#ccc'})
 	
 
 	var setting = "M32,20v-8h-4.734c-0.141-0.391-0.289-0.771-0.469-1.146l3.344-3.339l-5.656-5.661l-3.344,3.344"
