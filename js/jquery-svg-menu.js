@@ -203,7 +203,63 @@ function drawInitial(svg, settings) {
 			'transform' : 'rotate(162,' + x + ',' + y + ')'
 		});
 		// svg.text(g,x,y,"显示类型",{fill:'black',stroke:'none'});
-
+		//显示类型-->
+		g = svg.group({
+			fill : 'url(#gradient1)',
+			id : 'group3',
+			strokeWidth : 2,
+			stroke : 'rgba(204,204,204,.3)'
+		});
+		path = '';
+		path = path + 'M' + (center[0] + R )  + ' ' + center[1];
+		path = path + ' L' + (center[0] + (R + R / 2))  + ' ' + center[1];
+		path = path + ' A' + (center[0] + R / 2) + ' ' + (center[0] + R / 2) + ' 22.5 0 1 ' + (center[0] + (R + R/2) * _sin(112.5 / 180 * PI)) + ' ' + (center[1] - (R + R/2) * _cos(112.5 / 180 * PI)) ;
+		path = path + ' L' + (center[0] + R * _sin(112.5 / 180 * PI))  + ' ' + (center[1] - R * _cos(112.5 / 180 * PI));
+		path = path + ' A' + (center[0] + R )  + ' ' + (center[1] + R ) + ' 22.5 0 0 ' + (center[0] + R * _sin(112.5 / 180 * PI))  + ' ' + (center[1] - R * _cos(112.5 / 180 * PI));
+		svg.path(g, path);
+		
+		g = svg.group({
+			fill : 'url(#gradient1)',
+			id : 'group3',
+			strokeWidth : 2,
+			stroke : 'rgba(204,204,204,.3)'
+		});
+		path = '';
+		path = path + 'M' + (center[0] + R * _sin(112.5 / 180 * PI))  + ' ' + (center[1] - R * _cos(112.5 / 180 * PI));
+		path = path + ' L' + (center[0] + (R + R/2) * _sin(112.5 / 180 * PI)) + ' ' + (center[1] - (R + R/2) * _cos(112.5 / 180 * PI));
+		path = path + ' A' + (center[0] + R / 2) + ' ' + (center[0] + R / 2) + ' 22.5 0 1 ' + (center[0] + (R + R/2) * _sin(135 / 180 * PI)) + ' ' + (center[1] - (R + R/2) * _cos(135 / 180 * PI)) ;
+		path = path + ' L' + (center[0] + R * _sin(135 / 180 * PI))  + ' ' + (center[1] - R * _cos(135 / 180 * PI));
+		path = path + ' A' + (center[0] + R )  + ' ' + (center[1] + R ) + ' 22.5 0 0 ' + (center[0] + R * _sin(135 / 180 * PI))  + ' ' + (center[1] - R * _cos(138 / 180 * PI));
+		svg.path(g, path);
+		
+		g = svg.group({
+			fill : 'url(#gradient1)',
+			id : 'group3',
+			strokeWidth : 2,
+			stroke : 'rgba(204,204,204,.3)'
+		});
+		path = '';
+		path = path + 'M' + (center[0] + R * _sin(135 / 180 * PI))  + ' ' + (center[1] - R * _cos(135 / 180 * PI));
+		path = path + ' L' + (center[0] + (R + R/2) * _sin(135 / 180 * PI)) + ' ' + (center[1] - (R + R/2) * _cos(135 / 180 * PI));
+		path = path + ' A' + (center[0] + R / 2) + ' ' + (center[0] + R / 2) + ' 22.5 0 1 ' + (center[0] + (R + R/2) * _sin(157.5 / 180 * PI)) + ' ' + (center[1] - (R + R/2) * _cos(157.5 / 180 * PI)) ;
+		path = path + ' L' + (center[0] + R * _sin(157.5 / 180 * PI))  + ' ' + (center[1] - R * _cos(157.5 / 180 * PI));
+		path = path + ' A' + (center[0] + R )  + ' ' + (center[1] + R ) + ' 22.5 0 0 ' + (center[0] + R * _sin(157.5 / 180 * PI))  + ' ' + (center[1] - R * _cos(157.5 / 180 * PI));
+		svg.path(g, path);
+		
+		g = svg.group({
+			fill : 'url(#gradient1)',
+			id : 'group3',
+			strokeWidth : 2,
+			stroke : 'rgba(204,204,204,.3)'
+		});
+		path = '';
+		path = path + 'M' + (center[0] + R * _sin(157.5 / 180 * PI))  + ' ' + (center[1] - R * _cos(157.5 / 180 * PI));
+		path = path + ' L' + (center[0] + (R + R/2) * _sin(157.5 / 180 * PI)) + ' ' + (center[1] - (R + R/2) * _cos(157.5 / 180 * PI));
+		path = path + ' A' + (center[0] + R / 2) + ' ' + (center[0] + R / 2) + ' 22.5 0 1 ' + (center[0] + (R + R/2) * _sin(180 / 180 * PI)) + ' ' + (center[1] - (R + R/2) * _cos(180 / 180 * PI)) ;
+		path = path + ' L' + (center[0] + R * _sin(180 / 180 * PI))  + ' ' + (center[1] - R * _cos(160.5 / 180 * PI));
+		path = path + ' A' + (center[0] + R )  + ' ' + (center[1] + R ) + ' 22.5 0 0 ' + (center[0] + R * _sin(180 / 180 * PI))  + ' ' + (center[1] - R * _cos(180 / 180 * PI));
+		svg.path(g, path);
+		
 		// 分析类型
 		g = svg.group({
 			fill : 'url(#gradient1)',
@@ -262,7 +318,37 @@ function drawInitial(svg, settings) {
 			'stroke-width' : 1,
 			'transform' : 'rotate(252,' + x + ',' + y + ')'
 		});
-
+		
+		//分析类型
+		g = svg.group({
+			fill : 'url(#gradient1)',
+			id : 'group4',
+			strokeWidth : 2,
+			stroke : 'rgba(204,204,204,.3)'
+		});
+		path = '';//'M25 125 L85 125 A40 40 90 0 1 125 85 L125 25 A100 100 90 0 0 25 125';
+		path = path + 'M' + center[0] + ' ' + (center[1] + R); 
+		path = path + ' L' + center[0] + ' ' + (center[1] + R + R/2);
+		path = path + ' A' + (R + R / 2) + ' ' + (R + R / 2) + ' 45 0 1 ' + (center[0] + (R + R / 2) * _sin(225 / 180 * PI)) + ' ' + (center[1] - (R + R / 2) * _cos(225 / 180 * PI));
+		path = path + ' L' + (center[0] + R  * _sin(225 / 180 * PI))  + ' ' +  (center[1] - R  * _cos(225 / 180 * PI));
+		path = path + ' A' + R + ' ' + R + ' 45 0 0 ' + center[0] + ' ' + (center[1] + R);
+		svg.path(g, path);
+		
+		g = svg.group({
+			fill : 'url(#gradient1)',
+			id : 'group4',
+			strokeWidth : 2,
+			stroke : 'rgba(204,204,204,.3)'
+		});
+		path = '';//'M25 125 L85 125 A40 40 90 0 1 125 85 L125 25 A100 100 90 0 0 25 125';
+		path = path + 'M' + (center[0] + R  * _sin(225 / 180 * PI))  + ' ' +  (center[1] - R  * _cos(225 / 180 * PI)); 
+		path = path + ' L' + (center[0] + (R + R / 2) * _sin(225 / 180 * PI)) + ' ' + (center[1] - (R + R / 2) * _cos(225 / 180 * PI));
+		path = path + ' A' + (R + R / 2) + ' ' + (R + R / 2) + ' 45 0 1 ' + (center[0] + (R + R / 2) * _sin(270 / 180 * PI)) + ' ' + (center[1] - (R + R / 2) * _cos(270 / 180 * PI));
+		path = path + ' L' + (center[0] + R  * _sin(270 / 180 * PI))  + ' ' +  (center[1] - R  * _cos(270 / 180 * PI));
+		path = path + ' A' + R + ' ' + R + ' 45 0 0 ' + (center[0] + R  * _sin(225 / 180 * PI))  + ' ' +  (center[1] - R  * _cos(225 / 180 * PI));
+		svg.path(g, path);
+		
+		
 		// 数据类型
 		g = svg.group({
 			fill : 'url(#gradient1)',
@@ -282,7 +368,7 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - .65 * R * _cos(342 / 180 * PI);
 		y += 5;
-		svg.text(g, x, y, "数", {
+		svg.text(g, x, y, "型", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -294,7 +380,7 @@ function drawInitial(svg, settings) {
 		y = center[1] - .65 * R * _cos(324 / 180 * PI);
 		y += 5;
 
-		svg.text(g, x, y, "据", {
+		svg.text(g, x, y, "类", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -305,7 +391,7 @@ function drawInitial(svg, settings) {
 		y = center[1] - .65 * R * _cos(306 / 180 * PI);
 		y += 5;
 
-		svg.text(g, x, y, "类", {
+		svg.text(g, x, y, "据", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -315,13 +401,70 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - .65 * R * _cos(288 / 180 * PI);
 		y += 5;
-		svg.text(g, x, y, "型", {
+		svg.text(g, x, y, "数", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
 			'transform' : 'rotate(288,' + x + ',' + y + ')'
 		});
 
+		//数据类型->
+		g = svg.group({
+			fill : 'url(#gradient1)',
+			id : 'group4',
+			strokeWidth : 2,
+			stroke : 'rgba(204,204,204,.3)'
+		});
+		path = '';//'M25 125 L85 125 A40 40 90 0 1 125 85 L125 25 A100 100 90 0 0 25 125';
+		path = path + 'M' + (center[0] - R) + ' ' + center[1]; 
+		path = path + ' L' + (center[0] - R - R / 2) + ' ' + center[1];
+		path = path + ' A' + (R + R / 2) + ' ' + (R + R / 2) + ' 22.5 0 1 ' + (center[0] + (R + R / 2) * _sin(292.5 / 180 * PI)) + ' ' + (center[1] - (R + R / 2) * _cos(292.5 / 180 * PI));
+		path = path + ' L' + (center[0] + R * _sin(292.5 / 180 * PI)) + ' ' +  (center[1]  - R * _cos(292.5 / 180 * PI));
+		path = path + ' A' + R + ' ' + R + ' 22.5 0 0 ' + (center[0] - R) + ' ' + center[1];
+		svg.path(g, path);
+
+		g = svg.group({
+			fill : 'url(#gradient1)',
+			id : 'group4',
+			strokeWidth : 2,
+			stroke : 'rgba(204,204,204,.3)'
+		});
+		path = '';//'M25 125 L85 125 A40 40 90 0 1 125 85 L125 25 A100 100 90 0 0 25 125';
+		path = path + 'M' + (center[0] + R * _sin(292.5 / 180 * PI)) + ' ' +  (center[1]  - R * _cos(292.5 / 180 * PI)); 
+		path = path + ' L' + (center[0] + (R + R / 2) * _sin(292.5 / 180 * PI)) + ' ' + (center[1] - (R + R / 2) * _cos(292.5 / 180 * PI));
+		path = path + ' A' + (R + R / 2) + ' ' + (R + R / 2) + ' 22.5 0 1 ' + (center[0] + (R + R / 2) * _sin(315 / 180 * PI)) + ' ' + (center[1] - (R + R / 2) * _cos(315 / 180 * PI));
+		path = path + ' L' + (center[0] + R * _sin(315 / 180 * PI)) + ' ' +  (center[1]  - R * _cos(315 / 180 * PI));
+		path = path + ' A' + R + ' ' + R + ' 22.5 0 0 ' + (center[0] + R * _sin(292.5 / 180 * PI)) + ' ' +  (center[1]  - R * _cos(292.5 / 180 * PI));
+		svg.path(g, path);
+
+		g = svg.group({
+			fill : 'url(#gradient1)',
+			id : 'group4',
+			strokeWidth : 2,
+			stroke : 'rgba(204,204,204,.3)'
+		});
+		path = '';//'M25 125 L85 125 A40 40 90 0 1 125 85 L125 25 A100 100 90 0 0 25 125';
+		path = path + 'M' + (center[0] + R * _sin(315 / 180 * PI)) + ' ' +  (center[1]  - R * _cos(315 / 180 * PI)); 
+		path = path + ' L' + (center[0] + (R + R / 2) * _sin(315 / 180 * PI)) + ' ' + (center[1] - (R + R / 2) * _cos(315 / 180 * PI));
+		path = path + ' A' + (R + R / 2) + ' ' + (R + R / 2) + ' 22.5 0 1 ' + (center[0] + (R + R / 2) * _sin(337.5 / 180 * PI)) + ' ' + (center[1] - (R + R / 2) * _cos(337.5 / 180 * PI));
+		path = path + ' L' + (center[0] + R * _sin(337.5 / 180 * PI)) + ' ' +  (center[1]  - R * _cos(337.5 / 180 * PI));
+		path = path + ' A' + R + ' ' + R + ' 22.5 0 0 ' + (center[0] + R * _sin(315 / 180 * PI)) + ' ' +  (center[1]  - R * _cos(315 / 180 * PI));
+		svg.path(g, path);
+
+		g = svg.group({
+			fill : 'url(#gradient1)',
+			id : 'group4',
+			strokeWidth : 2,
+			stroke : 'rgba(204,204,204,.3)'
+		});
+		path = '';//'M25 125 L85 125 A40 40 90 0 1 125 85 L125 25 A100 100 90 0 0 25 125';
+		path = path + 'M' + (center[0] + R * _sin(337.5 / 180 * PI)) + ' ' +  (center[1]  - R * _cos(337.5 / 180 * PI)); 
+		path = path + ' L' + (center[0] + (R + R / 2) * _sin(337.5 / 180 * PI)) + ' ' + (center[1] - (R + R / 2) * _cos(337.5 / 180 * PI));
+		path = path + ' A' + (R + R / 2) + ' ' + (R + R / 2) + ' 22.5 0 1 ' + (center[0] + (R + R / 2) * _sin(360 / 180 * PI)) + ' ' + (center[1] - (R + R / 2) * _cos(360 / 180 * PI));
+		path = path + ' L' + (center[0] + R * _sin(360 / 180 * PI)) + ' ' +  (center[1]  - R * _cos(360 / 180 * PI));
+		path = path + ' A' + R + ' ' + R + ' 22.5 0 0 ' + (center[0] + R * _sin(360 / 180 * PI)) + ' ' +  (center[1]  - R * _cos(360 / 180 * PI));
+		svg.path(g, path);
+		
 		// 中心
 		g = svg.group({
 			fill : 'url(#gradient1)',
