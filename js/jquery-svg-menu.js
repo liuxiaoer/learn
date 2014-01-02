@@ -906,7 +906,3 @@ $.svg._afterLoad = function(container, svg, settings) {
 		alert(e);
 	}
 };
-
-$.svg("menu",{
-	onLoad : drawInitial
-});
