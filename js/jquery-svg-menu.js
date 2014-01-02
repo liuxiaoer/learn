@@ -7,16 +7,17 @@
 var menu;
 function drawInitial(svg, settings) {
 	var center = [ 175, 175 ];
-	var R = 100, r = 40,PI = Math.PI;
-	
+	var R = 100, r = 40, PI = Math.PI;
+	var w3 = 100;// µ⁄»˝≤„≤Àµ•øÌ∂»
+
 	var _addEvents = function(node) {
 	};
-	
-	var _sin = function(x){
+
+	var _sin = function(x) {
 		return Math.sin(x);
 	};
-	
-	var _cos = function(x){
+
+	var _cos = function(x) {
 		return Math.cos(x);
 	};
 
@@ -33,7 +34,7 @@ function drawInitial(svg, settings) {
 
 		var g = svg.group();
 
-		// Ê∏êÂèòËâ≤
+		// Ω•±‰…´
 		var defs = svg.defs(g);
 		var stop0 = [ 0.5, 'rgb(204,204,204)', .1 ];
 		var stop1 = [ .75, 'rgb(204,204,204)', .5 ];
@@ -53,28 +54,39 @@ function drawInitial(svg, settings) {
 					gradientUnits : 'userSpaceOnUse'
 				});
 
-		// Êù°‰ª∂ÈÄâÈ°π
+		// Ãıº˛—°œÓ
 		var g = svg.group({
 			fill : 'url(#gradient1)',
-			id : 'group1',
+			id : 'group1__1',
 			strokeWidth : 2,
 			stroke : 'rgba(204,204,204,.3)'
 		});
-		var path = '';//'M125 25 L125 85 A40 40 90 0 1 165 125 L225 125 A100 100 90 0 0 125 25';
-		path = path + 'M' + center[0] + ' ' +(center[1] - R);
-		path = path + ' L' + center[0] + ' ' +(center[1] - r);
-		path = path + ' A' + r + ' ' + r + ' 90 0 1 ' + (center[0] + r) + ' ' + center[1];
-		path = path + ' L' + (center[0] + R) + ' ' + center[1];
-		path = path + ' A' + R + ' ' + R + ' 90 0 0 ' + center[0] + ' ' + (center[1] - R);
-		svg.path(g, path);
+
+		var g2 = svg.group(g,{
+			fill : 'url(#gradient1)',
+			id : 'group1__2',
+			strokeWidth : 2,
+			stroke : 'rgba(204,204,204,.3)'
+		});
 		
-		// svg.text(g,165,85,"Êù°‰ª∂ÈÄâÈ°π",{fill:'black',stroke:'none'});
+		var path = '';// 'M125 25 L125 85 A40 40 90 0 1 165 125 L225 125 A100
+						// 100 90 0 0 125 25';
+		path = path + 'M' + center[0] + ' ' + (center[1] - R);
+		path = path + ' L' + center[0] + ' ' + (center[1] - r);
+		path = path + ' A' + r + ' ' + r + ' 90 0 1 ' + (center[0] + r) + ' '
+				+ center[1];
+		path = path + ' L' + (center[0] + R) + ' ' + center[1];
+		path = path + ' A' + R + ' ' + R + ' 90 0 0 ' + center[0] + ' '
+				+ (center[1] - R);
+		svg.path(g2, path);
+
+		// svg.text(g,165,85,"Ãıº˛—°œÓ",{fill:'black',stroke:'none'});
 		x = center[0] + .65 * R * _sin(18 / 180 * PI);
 		x -= 5;
 		y = center[1] - .65 * R * _cos(18 / 180 * PI);
 		y -= 5;
 
-		svg.text(g, x, y, "Êù°", {
+		svg.text(g2, x, y, "Ãı", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -85,7 +97,7 @@ function drawInitial(svg, settings) {
 		y = center[1] - .65 * R * _cos(36 / 180 * PI);
 		y -= 5;
 
-		svg.text(g, x, y, "‰ª∂", {
+		svg.text(g2, x, y, "º˛", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -96,7 +108,7 @@ function drawInitial(svg, settings) {
 		y = center[1] - .65 * R * _cos(54 / 180 * PI);
 		y -= 5;
 
-		svg.text(g, x, y, "ÈÄâ", {
+		svg.text(g2, x, y, "—°", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -106,64 +118,159 @@ function drawInitial(svg, settings) {
 		x -= 5;
 		y = center[1] - .65 * R * _cos(72 / 180 * PI);
 		y -= 5;
-		svg.text(g, x, y, "È°π", {
+		svg.text(g2, x, y, "œÓ", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
 			'transform' : 'rotate(72,' + x + ',' + y + ')'
 		});
 
-		g = svg.group( {
+		g3 = svg.group(g, {
 			fill : 'url(#gradient1)',
 			strokeWidth : 2,
-			stroke : 'rgba(204,204,204,.3)'
+			id : 'group1__2__1',
+			stroke : 'rgba(204,204,204,.3)',
+			display : 'none'
 		});
+		
+		$(g3).click(function(){
+			console.log(' ≥∆∑÷÷¿‡');
+			piemunuDatas['Ãıº˛—°œÓ'][' ≥∆∑÷÷¿‡'].click();
+		});
+		
 		var path = '';
 		// var path = 'M125 25 L125 85 A40 40 90 0 1 165 125 L225 125 A100 100
 		// 90 0 0 125 25';
 		path = path + 'M' + center[0] + ' ' + (center[1] - R);
-		path = path + ' L' + center[0] + ' ' + (center[1] - R - R/2);
-		path = path + ' A' + (center[0] + R / 2) + ' ' + (center[0] + R / 2) + ' 30 0 1 ' + (center[0] + (R + R/2) * _sin(30 / 180 * PI)) + ' ' + (center[1] - (R + R/2) * _cos(30 / 180 * PI)) ;
-		path = path + ' L' + (center[0] + R * _sin(30 / 180 * PI))  + ' ' + (center[1] - R * _cos(30 / 180 * PI));
-		path = path + ' A' + (center[0] + R  + 2)  + ' ' + (center[1] + R  + 2) + ' 30 0 0 ' + center[0] + ' ' + (center[1] - R);
-		svg.path(g, path);
-		
-		path = '';
-		path = path + 'M' + (center[0] + R * _sin(30 / 180 * PI))  + ' ' + (center[1] - R * _cos(30 / 180 * PI));
-		path = path + ' L' + (center[0] + (R + R / 2) * _sin(30 / 180 * PI))  + ' ' + (center[1] - (R + R / 2) * _cos(30 / 180 * PI));
-		path = path + ' A' + (center[0] + R / 2) + ' ' + (center[0] + R / 2) + ' 30 0 1 ' + (center[0] + (R + R/2) * _sin(60 / 180 * PI)) + ' ' + (center[1] - (R + R/2) * _cos(60 / 180 * PI)) ;
-		path = path + ' L' + (center[0] + R * _sin(60 / 180 * PI))  + ' ' + (center[1] - R * _cos(60 / 180 * PI));
-		path = path + ' A' + (center[0] + R  + 2)  + ' ' + (center[1] + R  + 2) + ' 30 0 0 ' + (center[0] + R * _sin(30 / 180 * PI))  + ' ' + (center[1] - R * _cos(30 / 180 * PI));
-		svg.path(g, path);
-		
-		path = '';
-		path = path + 'M' + (center[0] + R * _sin(60 / 180 * PI))  + ' ' + (center[1] - R * _cos(60 / 180 * PI));
-		path = path + ' L' + (center[0] + (R + R / 2) * _sin(60 / 180 * PI))  + ' ' + (center[1] - (R + R / 2) * _cos(60 / 180 * PI));
-		path = path + ' A' + (center[0] + R / 2) + ' ' + (center[0] + R / 2) + ' 30 0 1 ' + (center[0] + (R + R/2) * _sin(90 / 180 * PI)) + ' ' + (center[1] - (R + R/2) * _cos(90 / 180 * PI)) ;
-		path = path + ' L' + (center[0] + R * _sin(90 / 180 * PI))  + ' ' + (center[1] - R * _cos(90 / 180 * PI));
-		path = path + ' A' + (center[0] + R  + 2)  + ' ' + (center[1] + R  + 2) + ' 30 0 0 ' + (center[0] + R * _sin(60 / 180 * PI))  + ' ' + (center[1] - R * _cos(60 / 180 * PI));
-		svg.path(g, path);
+		path = path + ' L' + center[0] + ' ' + (center[1] - R - R / 2);
+		path = path + ' A' + (center[0] + R / 2) + ' ' + (center[0] + R / 2)
+				+ ' 30 0 1 ' + (center[0] + (R + R / 2) * _sin(30 / 180 * PI))
+				+ ' ' + (center[1] - (R + R / 2) * _cos(30 / 180 * PI));
+		path = path + ' L' + (center[0] + R * _sin(30 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(30 / 180 * PI));
+		path = path + ' A' + (center[0] + R + 2) + ' ' + (center[1] + R + 2)
+				+ ' 30 0 0 ' + center[0] + ' ' + (center[1] - R);
+		svg.path(g3, path);
 
-		// ÊòæÁ§∫Á±ªÂûã
+		x = center[0] + (R + R / 2) * _sin(15 / 180 * PI);
+		x += 5;
+		y = center[1] - R * _cos(15 / 180 * PI);
+		y -= 5;
+		svg.text(g3, x, y, " ≥∆∑÷÷¿‡", {
+			fill : 'black',
+			stroke : 'black',
+			'stroke-width' : 1,
+			'transform' : 'rotate(-75,' + x + ',' + y + ')'
+		});
+
+		g3 = svg.group(g, {
+			fill : 'url(#gradient1)',
+			strokeWidth : 2,
+			id : 'group1__2__2',
+			stroke : 'rgba(204,204,204,.3)',
+			display : 'none'
+		});
+		
+		$(g3).click(function(){
+			console.log('≥È—˘µÿµ„');
+			piemunuDatas['Ãıº˛—°œÓ']['≥È—˘µÿµ„'].click();
+		});
+		
+
+		path = '';
+		path = path + 'M' + (center[0] + R * _sin(30 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(30 / 180 * PI));
+		path = path + ' L' + (center[0] + (R + R / 2) * _sin(30 / 180 * PI))
+				+ ' ' + (center[1] - (R + R / 2) * _cos(30 / 180 * PI));
+		path = path + ' A' + (center[0] + R / 2) + ' ' + (center[0] + R / 2)
+				+ ' 30 0 1 ' + (center[0] + (R + R / 2) * _sin(60 / 180 * PI))
+				+ ' ' + (center[1] - (R + R / 2) * _cos(60 / 180 * PI));
+		path = path + ' L' + (center[0] + R * _sin(60 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(60 / 180 * PI));
+		path = path + ' A' + (center[0] + R + 2) + ' ' + (center[1] + R + 2)
+				+ ' 30 0 0 ' + (center[0] + R * _sin(30 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(30 / 180 * PI));
+		svg.path(g3, path);
+
+		x = center[0] + R * _sin(45 / 180 * PI);
+		x += 5;
+		y = center[1] - R * _cos(45 / 180 * PI);
+		y -= 5;
+		svg.text(g3, x, y, "≥È—˘µÿµ„", {
+			fill : 'black',
+			stroke : 'black',
+			'stroke-width' : 1,
+			'transform' : 'rotate(-45,' + x + ',' + y + ')'
+		});
+
+		g3 = svg.group(g, {
+			fill : 'url(#gradient1)',
+			strokeWidth : 2,
+			id : 'group1__2__3',
+			stroke : 'rgba(204,204,204,.3)',
+			display : 'none'
+		});
+		
+		$(g3).click(function(){
+			console.log('≥È—˘«¯œÿ');
+			piemunuDatas['Ãıº˛—°œÓ']['≥È—˘«¯œÿ'].click();
+		});
+
+		path = '';
+		path = path + 'M' + (center[0] + R * _sin(60 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(60 / 180 * PI));
+		path = path + ' L' + (center[0] + (R + R / 2) * _sin(60 / 180 * PI))
+				+ ' ' + (center[1] - (R + R / 2) * _cos(60 / 180 * PI));
+		path = path + ' A' + (center[0] + R / 2) + ' ' + (center[0] + R / 2)
+				+ ' 30 0 1 ' + (center[0] + (R + R / 2) * _sin(90 / 180 * PI))
+				+ ' ' + (center[1] - (R + R / 2) * _cos(90 / 180 * PI));
+		path = path + ' L' + (center[0] + R * _sin(90 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(90 / 180 * PI));
+		path = path + ' A' + (center[0] + R + 2) + ' ' + (center[1] + R + 2)
+				+ ' 30 0 0 ' + (center[0] + R * _sin(60 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(60 / 180 * PI));
+		svg.path(g3, path);
+
+		x = center[0] + R * _sin(75 / 180 * PI);
+		x += 5;
+		y = center[1] - R * _cos(75 / 180 * PI);
+		y -= 5;
+		svg.text(g3, x, y, "≥È—˘«¯œÿ", {
+			fill : 'black',
+			stroke : 'black',
+			'stroke-width' : 1,
+			'transform' : 'rotate(-15,' + x + ',' + y + ')'
+		});
+
+		// œ‘ æ¿‡–Õ
 		g = svg.group({
 			fill : 'url(#gradient1)',
-			id : 'group2',
+			id : 'group2__1',
 			strokeWidth : 2,
 			stroke : 'rgba(204,204,204,.3)'
 		});
-		var path = '';//'M225 125 L165 125 A40 40 90 0 1 125 165 L125 225 A100 100 90 0 0 225 125';
+		g2 = svg.group(g,{
+			fill : 'url(#gradient1)',
+			id : 'group2__2',
+			strokeWidth : 2,
+			stroke : 'rgba(204,204,204,.3)'
+		});
+		var path = '';// 'M225 125 L165 125 A40 40 90 0 1 125 165 L125 225
+						// A100 100 90 0 0 225 125';
 		path = path + 'M' + (center[0] + R) + ' ' + center[1];
 		path = path + ' L' + (center[0] + r) + ' ' + center[1];
-		path = path + ' A' + r + ' ' + r + ' 90 0 1 ' + center[0] + ' ' + (center[1] + r);
-		path = path + ' L' + center[0] + ' ' +  (center[1] + R);
-		path = path + ' A' + R + ' ' + R + ' 90 0 0 ' + (center[0] + R) + ' ' + center[1];
-		svg.path(g, path);
+		path = path + ' A' + r + ' ' + r + ' 90 0 1 ' + center[0] + ' '
+				+ (center[1] + r);
+		path = path + ' L' + center[0] + ' ' + (center[1] + R);
+		path = path + ' A' + R + ' ' + R + ' 90 0 0 ' + (center[0] + R) + ' '
+				+ center[1];
+		svg.path(g2, path);
 
 		x = center[0] + .65 * R * _sin(108 / 180 * PI);
 		x += 5;
 		y = center[1] - .65 * R * _cos(108 / 180 * PI);
 		y -= 5;
-		svg.text(g, x, y, "Êòæ", {
+		svg.text(g2, x, y, "œ‘", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -174,7 +281,7 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - .65 * R * _cos(126 / 180 * PI);
 		y -= 5;
-		svg.text(g, x, y, "Á§∫", {
+		svg.text(g2, x, y, " æ", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -185,7 +292,7 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - .65 * R * _cos(144 / 180 * PI);
 		y -= 5;
-		svg.text(g, x, y, "Á±ª", {
+		svg.text(g2, x, y, "¿‡", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -196,90 +303,200 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - .65 * R * _cos(162 / 180 * PI);
 		y -= 5;
-		svg.text(g, x, y, "Âûã", {
+		svg.text(g2, x, y, "–Õ", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
 			'transform' : 'rotate(162,' + x + ',' + y + ')'
 		});
-		// svg.text(g,x,y,"ÊòæÁ§∫Á±ªÂûã",{fill:'black',stroke:'none'});
-		//ÊòæÁ§∫Á±ªÂûã-->
-		g = svg.group({
+		// svg.text(g,x,y,"œ‘ æ¿‡–Õ",{fill:'black',stroke:'none'});
+		// œ‘ æ¿‡–Õ-->
+		//µÿÕº
+		g3 = svg.group(g, {
 			fill : 'url(#gradient1)',
-			id : 'group3',
+			id : 'group2__2__1',
 			strokeWidth : 2,
-			stroke : 'rgba(204,204,204,.3)'
+			stroke : 'rgba(204,204,204,.3)',
+			display : 'none'
+		});
+		$(g3).click(function(){
+			console.log('µÿÕº');
+			piemunuDatas['œ‘ æ¿‡–Õ']['µÿÕº'].click();
 		});
 		path = '';
-		path = path + 'M' + (center[0] + R )  + ' ' + center[1];
-		path = path + ' L' + (center[0] + (R + R / 2))  + ' ' + center[1];
-		path = path + ' A' + (center[0] + R / 2) + ' ' + (center[0] + R / 2) + ' 22.5 0 1 ' + (center[0] + (R + R/2) * _sin(112.5 / 180 * PI)) + ' ' + (center[1] - (R + R/2) * _cos(112.5 / 180 * PI)) ;
-		path = path + ' L' + (center[0] + R * _sin(112.5 / 180 * PI))  + ' ' + (center[1] - R * _cos(112.5 / 180 * PI));
-		path = path + ' A' + (center[0] + R )  + ' ' + (center[1] + R ) + ' 22.5 0 0 ' + (center[0] + R * _sin(112.5 / 180 * PI))  + ' ' + (center[1] - R * _cos(112.5 / 180 * PI));
-		svg.path(g, path);
+		path = path + 'M' + (center[0] + R) + ' ' + center[1];
+		path = path + ' L' + (center[0] + (R + R / 2)) + ' ' + center[1];
+		path = path + ' A' + (center[0] + R / 2) + ' ' + (center[0] + R / 2)
+				+ ' 22.5 0 1 '
+				+ (center[0] + (R + R / 2) * _sin(112.5 / 180 * PI)) + ' '
+				+ (center[1] - (R + R / 2) * _cos(112.5 / 180 * PI));
+		path = path + ' L' + (center[0] + R * _sin(112.5 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(112.5 / 180 * PI));
+		path = path + ' A' + (center[0] + R) + ' ' + (center[1] + R)
+				+ ' 22.5 0 0 ' + (center[0] + R * _sin(112.5 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(112.5 / 180 * PI));
+		svg.path(g3, path);
+
+		per = 90 / 4;
+		x = center[0] + R * _sin((90 + per * 1) / 180 * PI);
+		x += 5;
+		y = center[1] - R * _cos((90 + per * 1) / 180 * PI);
+		y -= 5;
+		svg.text(g3, x, y, "µÿÕº", {
+			fill : 'black',
+			stroke : 'black',
+			'stroke-width' : 1,
+			'transform' : 'rotate(' + per / 2 + ',' + x + ',' + y + ')'
+		});
 		
-		g = svg.group({
+		//±˝Õº
+		g3 = svg.group(g, {
 			fill : 'url(#gradient1)',
-			id : 'group3',
+			id : 'group2__2__2',
 			strokeWidth : 2,
-			stroke : 'rgba(204,204,204,.3)'
+			stroke : 'rgba(204,204,204,.3)',
+			display : 'none'
+		});
+		$(g3).click(function(){
+			console.log('±˝Õº');
+			piemunuDatas['œ‘ æ¿‡–Õ']['±˝Õº'].click();
 		});
 		path = '';
-		path = path + 'M' + (center[0] + R * _sin(112.5 / 180 * PI))  + ' ' + (center[1] - R * _cos(112.5 / 180 * PI));
-		path = path + ' L' + (center[0] + (R + R/2) * _sin(112.5 / 180 * PI)) + ' ' + (center[1] - (R + R/2) * _cos(112.5 / 180 * PI));
-		path = path + ' A' + (center[0] + R / 2) + ' ' + (center[0] + R / 2) + ' 22.5 0 1 ' + (center[0] + (R + R/2) * _sin(135 / 180 * PI)) + ' ' + (center[1] - (R + R/2) * _cos(135 / 180 * PI)) ;
-		path = path + ' L' + (center[0] + R * _sin(135 / 180 * PI))  + ' ' + (center[1] - R * _cos(135 / 180 * PI));
-		path = path + ' A' + (center[0] + R )  + ' ' + (center[1] + R ) + ' 22.5 0 0 ' + (center[0] + R * _sin(135 / 180 * PI))  + ' ' + (center[1] - R * _cos(138 / 180 * PI));
-		svg.path(g, path);
+		path = path + 'M' + (center[0] + R * _sin(112.5 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(112.5 / 180 * PI));
+		path = path + ' L' + (center[0] + (R + R / 2) * _sin(112.5 / 180 * PI))
+				+ ' ' + (center[1] - (R + R / 2) * _cos(112.5 / 180 * PI));
+		path = path + ' A' + (center[0] + R / 2) + ' ' + (center[0] + R / 2)
+				+ ' 22.5 0 1 '
+				+ (center[0] + (R + R / 2) * _sin(135 / 180 * PI)) + ' '
+				+ (center[1] - (R + R / 2) * _cos(135 / 180 * PI));
+		path = path + ' L' + (center[0] + R * _sin(135 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(135 / 180 * PI));
+		path = path + ' A' + (center[0] + R) + ' ' + (center[1] + R)
+				+ ' 22.5 0 0 ' + (center[0] + R * _sin(135 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(138 / 180 * PI));
+		svg.path(g3, path);
+
+		x = center[0] + R * _sin((90 + per * 2) / 180 * PI);
+		x += 5;
+		y = center[1] - R * _cos((90 + per * 2) / 180 * PI);
+		y -= 5;
+		svg.text(g3, x, y, "±˝Õº", {
+			fill : 'black',
+			stroke : 'black',
+			'stroke-width' : 1,
+			'transform' : 'rotate(' + (per + per / 2) + ',' + x + ',' + y + ')'
+		});
 		
-		g = svg.group({
+		//«˜ ∆Õº
+		g3 = svg.group(g, {
 			fill : 'url(#gradient1)',
-			id : 'group3',
+			id : 'group2__2__3',
 			strokeWidth : 2,
-			stroke : 'rgba(204,204,204,.3)'
+			stroke : 'rgba(204,204,204,.3)',
+			display : 'none'
+		});
+		$(g3).click(function(){
+			console.log('«˜ ∆Õº');
+			piemunuDatas['œ‘ æ¿‡–Õ']['«˜ ∆Õº'].click();
+		});
+
+		path = '';
+		path = path + 'M' + (center[0] + R * _sin(135 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(135 / 180 * PI));
+		path = path + ' L' + (center[0] + (R + R / 2) * _sin(135 / 180 * PI))
+				+ ' ' + (center[1] - (R + R / 2) * _cos(135 / 180 * PI));
+		path = path + ' A' + (center[0] + R / 2) + ' ' + (center[0] + R / 2)
+				+ ' 22.5 0 1 '
+				+ (center[0] + (R + R / 2) * _sin(157.5 / 180 * PI)) + ' '
+				+ (center[1] - (R + R / 2) * _cos(157.5 / 180 * PI));
+		path = path + ' L' + (center[0] + R * _sin(157.5 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(157.5 / 180 * PI));
+		path = path + ' A' + (center[0] + R) + ' ' + (center[1] + R)
+				+ ' 22.5 0 0 ' + (center[0] + R * _sin(157.5 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(157.5 / 180 * PI));
+		svg.path(g3, path);
+
+		x = center[0] + R * _sin((90 + per * 3) / 180 * PI);
+		x += 5;
+		y = center[1] - R * _cos((90 + per * 3) / 180 * PI);
+		y -= 5;
+		svg.text(g3, x, y, "«˜ ∆Õº", {
+			fill : 'black',
+			stroke : 'black',
+			'stroke-width' : 1,
+			'transform' : 'rotate(' + (per * 2 + per / 2) + ',' + x + ',' + y
+					+ ')'
+		});
+
+		//∑÷ŒˆÕº
+		g3 = svg.group(g, {
+			fill : 'url(#gradient1)',
+			id : 'group2__2__4',
+			strokeWidth : 2,
+			stroke : 'rgba(204,204,204,.3)',
+			display : 'none'
+		});
+		$(g3).click(function(){
+			console.log('≤ª∫œ∏Ò≤˙∆∑∑÷ŒˆÕº');
+			piemunuDatas['œ‘ æ¿‡–Õ']['≤ª∫œ∏Ò≤˙∆∑∑÷ŒˆÕº'].click();
 		});
 		path = '';
-		path = path + 'M' + (center[0] + R * _sin(135 / 180 * PI))  + ' ' + (center[1] - R * _cos(135 / 180 * PI));
-		path = path + ' L' + (center[0] + (R + R/2) * _sin(135 / 180 * PI)) + ' ' + (center[1] - (R + R/2) * _cos(135 / 180 * PI));
-		path = path + ' A' + (center[0] + R / 2) + ' ' + (center[0] + R / 2) + ' 22.5 0 1 ' + (center[0] + (R + R/2) * _sin(157.5 / 180 * PI)) + ' ' + (center[1] - (R + R/2) * _cos(157.5 / 180 * PI)) ;
-		path = path + ' L' + (center[0] + R * _sin(157.5 / 180 * PI))  + ' ' + (center[1] - R * _cos(157.5 / 180 * PI));
-		path = path + ' A' + (center[0] + R )  + ' ' + (center[1] + R ) + ' 22.5 0 0 ' + (center[0] + R * _sin(157.5 / 180 * PI))  + ' ' + (center[1] - R * _cos(157.5 / 180 * PI));
-		svg.path(g, path);
-		
+		path = path + 'M' + (center[0] + R * _sin(157.5 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(157.5 / 180 * PI));
+		path = path + ' L' + (center[0] + (R + R / 2) * _sin(157.5 / 180 * PI))
+				+ ' ' + (center[1] - (R + R / 2) * _cos(157.5 / 180 * PI));
+		path = path + ' A' + (center[0] + R / 2) + ' ' + (center[0] + R / 2)
+				+ ' 22.5 0 1 '
+				+ (center[0] + (R + R / 2) * _sin(180 / 180 * PI)) + ' '
+				+ (center[1] - (R + R / 2) * _cos(180 / 180 * PI));
+		path = path + ' L' + (center[0] + R * _sin(180 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(160.5 / 180 * PI));
+		path = path + ' A' + (center[0] + R) + ' ' + (center[1] + R)
+				+ ' 22.5 0 0 ' + (center[0] + R * _sin(180 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(180 / 180 * PI));
+		svg.path(g3, path);
+
+		x = center[0] + R * _sin((90 + per * 4) / 180 * PI);
+		x += 5;
+		y = center[1] - R * _cos((90 + per * 4) / 180 * PI);
+		y -= 5;
+		svg.text(g3, x, y, "∑÷ŒˆÕº", {
+			fill : 'black',
+			stroke : 'black',
+			'stroke-width' : 1,
+			'transform' : 'rotate(' + (per * 3 + per / 2) + ',' + x + ',' + y
+					+ ')'
+		});
+
+		// ∑÷Œˆ¿‡–Õ
 		g = svg.group({
 			fill : 'url(#gradient1)',
-			id : 'group3',
+			id : 'group3__1',
 			strokeWidth : 2,
 			stroke : 'rgba(204,204,204,.3)'
 		});
-		path = '';
-		path = path + 'M' + (center[0] + R * _sin(157.5 / 180 * PI))  + ' ' + (center[1] - R * _cos(157.5 / 180 * PI));
-		path = path + ' L' + (center[0] + (R + R/2) * _sin(157.5 / 180 * PI)) + ' ' + (center[1] - (R + R/2) * _cos(157.5 / 180 * PI));
-		path = path + ' A' + (center[0] + R / 2) + ' ' + (center[0] + R / 2) + ' 22.5 0 1 ' + (center[0] + (R + R/2) * _sin(180 / 180 * PI)) + ' ' + (center[1] - (R + R/2) * _cos(180 / 180 * PI)) ;
-		path = path + ' L' + (center[0] + R * _sin(180 / 180 * PI))  + ' ' + (center[1] - R * _cos(160.5 / 180 * PI));
-		path = path + ' A' + (center[0] + R )  + ' ' + (center[1] + R ) + ' 22.5 0 0 ' + (center[0] + R * _sin(180 / 180 * PI))  + ' ' + (center[1] - R * _cos(180 / 180 * PI));
-		svg.path(g, path);
-		
-		// ÂàÜÊûêÁ±ªÂûã
-		g = svg.group({
+		g2 = svg.group(g,{
 			fill : 'url(#gradient1)',
-			id : 'group3',
+			id : 'group3__2',
 			strokeWidth : 2,
 			stroke : 'rgba(204,204,204,.3)'
 		});
-		path = '';//'M125 225 L125 165 A40 40 90 0 1 85 125 L25 125 A100 100 90 0 0 125 225';
-		path = path + 'M' + center[0] + ' ' + (center[1] + R); 
+		path = '';// 'M125 225 L125 165 A40 40 90 0 1 85 125 L25 125 A100 100
+					// 90 0 0 125 225';
+		path = path + 'M' + center[0] + ' ' + (center[1] + R);
 		path = path + ' L' + center[0] + ' ' + (center[1] + r);
-		path = path + ' A' + r + ' ' + r + ' 90 0 1 ' + (center[0] - r) + ' ' + center[1];
-		path = path + ' L' + (center[0] - R) + ' ' +  center[1];
-		path = path + ' A' + R + ' ' + R + ' 90 0 0 ' + center[0] + ' ' + (center[1] + R);
-		svg.path(g, path);
-		// svg.text(g,85,85,"Êï∞ÊçÆÁ±ªÂûã",{fill:'black',stroke:'none'});
+		path = path + ' A' + r + ' ' + r + ' 90 0 1 ' + (center[0] - r) + ' '
+				+ center[1];
+		path = path + ' L' + (center[0] - R) + ' ' + center[1];
+		path = path + ' A' + R + ' ' + R + ' 90 0 0 ' + center[0] + ' '
+				+ (center[1] + R);
+		svg.path(g2, path);
 		x = center[0] + .65 * R * _sin(198 / 180 * PI);
 		x += 5;
 		y = center[1] - .65 * R * _cos(198 / 180 * PI);
 		y += 5;
-		svg.text(g, x, y, "ÂàÜ", {
+		svg.text(g2, x, y, "∑÷", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -291,7 +508,7 @@ function drawInitial(svg, settings) {
 		y = center[1] - .65 * R * _cos(216 / 180 * PI);
 		y += 5;
 
-		svg.text(g, x, y, "Êûê", {
+		svg.text(g2, x, y, "Œˆ", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -302,7 +519,7 @@ function drawInitial(svg, settings) {
 		y = center[1] - .65 * R * _cos(234 / 180 * PI);
 		y += 5;
 
-		svg.text(g, x, y, "Á±ª", {
+		svg.text(g2, x, y, "¿‡", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -312,63 +529,121 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - .65 * R * _cos(252 / 180 * PI);
 		y += 5;
-		svg.text(g, x, y, "Âûã", {
+		svg.text(g2, x, y, "–Õ", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
 			'transform' : 'rotate(252,' + x + ',' + y + ')'
 		});
+
+		// ∑÷Œˆ¿‡–Õ
+		//∞¥≤˙µÿ
+		g3 = svg.group(g, {
+			fill : 'url(#gradient1)',
+			id : 'group3__2__1',
+			strokeWidth : 2,
+			stroke : 'rgba(204,204,204,.3)',
+			display : 'none'
+		});
 		
-		//ÂàÜÊûêÁ±ªÂûã
+		$(g3).click(function(){
+			console.log('∞¥≤˙µÿ');
+			piemunuDatas['∑÷Œˆ¿‡–Õ']['∞¥≤˙µÿ'].click();
+		});
+		path = '';
+		path = path + 'M' + center[0] + ' ' + (center[1] + R);
+		path = path + ' L' + center[0] + ' ' + (center[1] + R + R / 2);
+		path = path + ' A' + (R + R / 2) + ' ' + (R + R / 2) + ' 45 0 1 '
+				+ (center[0] + (R + R / 2) * _sin(225 / 180 * PI)) + ' '
+				+ (center[1] - (R + R / 2) * _cos(225 / 180 * PI));
+		path = path + ' L' + (center[0] + R * _sin(225 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(225 / 180 * PI));
+		path = path + ' A' + R + ' ' + R + ' 45 0 0 ' + center[0] + ' '
+				+ (center[1] + R);
+		svg.path(g3, path);
+
+		per = 90 / 2;
+		x = center[0] + R * _sin((180 + per / 2) / 180 * PI);
+		x += 5;
+		y = center[1] - R * _cos((180 + per / 2) / 180 * PI);
+		y -= 5;
+		svg.text(g3, x, y, "∞¥≤˙µÿ", {
+			fill : 'black',
+			stroke : 'black',
+			'stroke-width' : 1,
+			'transform' : 'rotate(' + (90 + per / 2) + ',' + x + ',' + y + ')'
+		});
+		
+		g3 = svg.group(g, {
+			fill : 'url(#gradient1)',
+			id : 'group3__2__2',
+			strokeWidth : 2,
+			stroke : 'rgba(204,204,204,.3)',
+			display : 'none'
+		});
+		
+		$(g3).click(function(){
+			console.log('∞¥≥È—˘«¯œÿ');
+			piemunuDatas['∑÷Œˆ¿‡–Õ']['∞¥≥È—˘«¯œÿ'].click();
+		});
+
+		path = '';
+		path = path + 'M' + (center[0] + R * _sin(225 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(225 / 180 * PI));
+		path = path + ' L' + (center[0] + (R + R / 2) * _sin(225 / 180 * PI))
+				+ ' ' + (center[1] - (R + R / 2) * _cos(225 / 180 * PI));
+		path = path + ' A' + (R + R / 2) + ' ' + (R + R / 2) + ' 45 0 1 '
+				+ (center[0] + (R + R / 2) * _sin(270 / 180 * PI)) + ' '
+				+ (center[1] - (R + R / 2) * _cos(270 / 180 * PI));
+		path = path + ' L' + (center[0] + R * _sin(270 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(270 / 180 * PI));
+		path = path + ' A' + R + ' ' + R + ' 45 0 0 '
+				+ (center[0] + R * _sin(225 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(225 / 180 * PI));
+		svg.path(g3, path);
+
+		per = 90 / 2;
+		x = center[0] + R * _sin((180 + per / 2 + per) / 180 * PI);
+		x += 5;
+		y = center[1] - R * _cos((180 + per / 2 + per) / 180 * PI);
+		y -= 5;
+		svg.text(g3, x, y, "«¯œÿ", {
+			fill : 'black',
+			stroke : 'black',
+			'stroke-width' : 1,
+			'transform' : 'rotate(' + (90 + per / 2 + per) + ',' + x + ',' + y
+					+ ')'
+		});
+
+		//  ˝æ›¿‡–Õ
 		g = svg.group({
 			fill : 'url(#gradient1)',
-			id : 'group4',
+			id : 'group4__1',
 			strokeWidth : 2,
 			stroke : 'rgba(204,204,204,.3)'
 		});
-		path = '';//'M25 125 L85 125 A40 40 90 0 1 125 85 L125 25 A100 100 90 0 0 25 125';
-		path = path + 'M' + center[0] + ' ' + (center[1] + R); 
-		path = path + ' L' + center[0] + ' ' + (center[1] + R + R/2);
-		path = path + ' A' + (R + R / 2) + ' ' + (R + R / 2) + ' 45 0 1 ' + (center[0] + (R + R / 2) * _sin(225 / 180 * PI)) + ' ' + (center[1] - (R + R / 2) * _cos(225 / 180 * PI));
-		path = path + ' L' + (center[0] + R  * _sin(225 / 180 * PI))  + ' ' +  (center[1] - R  * _cos(225 / 180 * PI));
-		path = path + ' A' + R + ' ' + R + ' 45 0 0 ' + center[0] + ' ' + (center[1] + R);
-		svg.path(g, path);
-		
-		g = svg.group({
+		g2 = svg.group(g,{
 			fill : 'url(#gradient1)',
-			id : 'group4',
+			id : 'group4__2',
 			strokeWidth : 2,
 			stroke : 'rgba(204,204,204,.3)'
 		});
-		path = '';//'M25 125 L85 125 A40 40 90 0 1 125 85 L125 25 A100 100 90 0 0 25 125';
-		path = path + 'M' + (center[0] + R  * _sin(225 / 180 * PI))  + ' ' +  (center[1] - R  * _cos(225 / 180 * PI)); 
-		path = path + ' L' + (center[0] + (R + R / 2) * _sin(225 / 180 * PI)) + ' ' + (center[1] - (R + R / 2) * _cos(225 / 180 * PI));
-		path = path + ' A' + (R + R / 2) + ' ' + (R + R / 2) + ' 45 0 1 ' + (center[0] + (R + R / 2) * _sin(270 / 180 * PI)) + ' ' + (center[1] - (R + R / 2) * _cos(270 / 180 * PI));
-		path = path + ' L' + (center[0] + R  * _sin(270 / 180 * PI))  + ' ' +  (center[1] - R  * _cos(270 / 180 * PI));
-		path = path + ' A' + R + ' ' + R + ' 45 0 0 ' + (center[0] + R  * _sin(225 / 180 * PI))  + ' ' +  (center[1] - R  * _cos(225 / 180 * PI));
-		svg.path(g, path);
-		
-		
-		// Êï∞ÊçÆÁ±ªÂûã
-		g = svg.group({
-			fill : 'url(#gradient1)',
-			id : 'group4',
-			strokeWidth : 2,
-			stroke : 'rgba(204,204,204,.3)'
-		});
-		path = '';//'M25 125 L85 125 A40 40 90 0 1 125 85 L125 25 A100 100 90 0 0 25 125';
-		path = path + 'M' + (center[0] - R) + ' ' + center[1]; 
+		path = '';// 'M25 125 L85 125 A40 40 90 0 1 125 85 L125 25 A100 100 90
+					// 0 0 25 125';
+		path = path + 'M' + (center[0] - R) + ' ' + center[1];
 		path = path + ' L' + (center[0] - r) + ' ' + center[1];
-		path = path + ' A' + r + ' ' + r + ' 90 0 1 ' + center[0] + ' ' + (center[1] - r);
-		path = path + ' L' + center[0] + ' ' +  (center[1] - R);
-		path = path + ' A' + R + ' ' + R + ' 90 0 0 ' + (center[0] - R) + ' ' + center[1];
-		svg.path(g, path);
-		
+		path = path + ' A' + r + ' ' + r + ' 90 0 1 ' + center[0] + ' '
+				+ (center[1] - r);
+		path = path + ' L' + center[0] + ' ' + (center[1] - R);
+		path = path + ' A' + R + ' ' + R + ' 90 0 0 ' + (center[0] - R) + ' '
+				+ center[1];
+		svg.path(g2, path);
+
 		x = center[0] + .65 * R * _sin(342 / 180 * PI);
 		x += 5;
 		y = center[1] - .65 * R * _cos(342 / 180 * PI);
 		y += 5;
-		svg.text(g, x, y, "Âûã", {
+		svg.text(g2, x, y, "–Õ", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -380,7 +655,7 @@ function drawInitial(svg, settings) {
 		y = center[1] - .65 * R * _cos(324 / 180 * PI);
 		y += 5;
 
-		svg.text(g, x, y, "Á±ª", {
+		svg.text(g2, x, y, "¿‡", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -391,7 +666,7 @@ function drawInitial(svg, settings) {
 		y = center[1] - .65 * R * _cos(306 / 180 * PI);
 		y += 5;
 
-		svg.text(g, x, y, "ÊçÆ", {
+		svg.text(g2, x, y, "æ›", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -401,71 +676,180 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - .65 * R * _cos(288 / 180 * PI);
 		y += 5;
-		svg.text(g, x, y, "Êï∞", {
+		svg.text(g2, x, y, " ˝", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
 			'transform' : 'rotate(288,' + x + ',' + y + ')'
 		});
 
-		//Êï∞ÊçÆÁ±ªÂûã->
-		g = svg.group({
+		//  ˝æ›¿‡–Õ->
+		//º‡∂Ω≥È≤È
+		g3 = svg.group(g, {
 			fill : 'url(#gradient1)',
-			id : 'group4',
+			id : 'group4__2__1',
 			strokeWidth : 2,
-			stroke : 'rgba(204,204,204,.3)'
+			stroke : 'rgba(204,204,204,.3)',
+			display : 'none'
 		});
-		path = '';//'M25 125 L85 125 A40 40 90 0 1 125 85 L125 25 A100 100 90 0 0 25 125';
-		path = path + 'M' + (center[0] - R) + ' ' + center[1]; 
-		path = path + ' L' + (center[0] - R - R / 2) + ' ' + center[1];
-		path = path + ' A' + (R + R / 2) + ' ' + (R + R / 2) + ' 22.5 0 1 ' + (center[0] + (R + R / 2) * _sin(292.5 / 180 * PI)) + ' ' + (center[1] - (R + R / 2) * _cos(292.5 / 180 * PI));
-		path = path + ' L' + (center[0] + R * _sin(292.5 / 180 * PI)) + ' ' +  (center[1]  - R * _cos(292.5 / 180 * PI));
-		path = path + ' A' + R + ' ' + R + ' 22.5 0 0 ' + (center[0] - R) + ' ' + center[1];
-		svg.path(g, path);
-
-		g = svg.group({
-			fill : 'url(#gradient1)',
-			id : 'group4',
-			strokeWidth : 2,
-			stroke : 'rgba(204,204,204,.3)'
-		});
-		path = '';//'M25 125 L85 125 A40 40 90 0 1 125 85 L125 25 A100 100 90 0 0 25 125';
-		path = path + 'M' + (center[0] + R * _sin(292.5 / 180 * PI)) + ' ' +  (center[1]  - R * _cos(292.5 / 180 * PI)); 
-		path = path + ' L' + (center[0] + (R + R / 2) * _sin(292.5 / 180 * PI)) + ' ' + (center[1] - (R + R / 2) * _cos(292.5 / 180 * PI));
-		path = path + ' A' + (R + R / 2) + ' ' + (R + R / 2) + ' 22.5 0 1 ' + (center[0] + (R + R / 2) * _sin(315 / 180 * PI)) + ' ' + (center[1] - (R + R / 2) * _cos(315 / 180 * PI));
-		path = path + ' L' + (center[0] + R * _sin(315 / 180 * PI)) + ' ' +  (center[1]  - R * _cos(315 / 180 * PI));
-		path = path + ' A' + R + ' ' + R + ' 22.5 0 0 ' + (center[0] + R * _sin(292.5 / 180 * PI)) + ' ' +  (center[1]  - R * _cos(292.5 / 180 * PI));
-		svg.path(g, path);
-
-		g = svg.group({
-			fill : 'url(#gradient1)',
-			id : 'group4',
-			strokeWidth : 2,
-			stroke : 'rgba(204,204,204,.3)'
-		});
-		path = '';//'M25 125 L85 125 A40 40 90 0 1 125 85 L125 25 A100 100 90 0 0 25 125';
-		path = path + 'M' + (center[0] + R * _sin(315 / 180 * PI)) + ' ' +  (center[1]  - R * _cos(315 / 180 * PI)); 
-		path = path + ' L' + (center[0] + (R + R / 2) * _sin(315 / 180 * PI)) + ' ' + (center[1] - (R + R / 2) * _cos(315 / 180 * PI));
-		path = path + ' A' + (R + R / 2) + ' ' + (R + R / 2) + ' 22.5 0 1 ' + (center[0] + (R + R / 2) * _sin(337.5 / 180 * PI)) + ' ' + (center[1] - (R + R / 2) * _cos(337.5 / 180 * PI));
-		path = path + ' L' + (center[0] + R * _sin(337.5 / 180 * PI)) + ' ' +  (center[1]  - R * _cos(337.5 / 180 * PI));
-		path = path + ' A' + R + ' ' + R + ' 22.5 0 0 ' + (center[0] + R * _sin(315 / 180 * PI)) + ' ' +  (center[1]  - R * _cos(315 / 180 * PI));
-		svg.path(g, path);
-
-		g = svg.group({
-			fill : 'url(#gradient1)',
-			id : 'group4',
-			strokeWidth : 2,
-			stroke : 'rgba(204,204,204,.3)'
-		});
-		path = '';//'M25 125 L85 125 A40 40 90 0 1 125 85 L125 25 A100 100 90 0 0 25 125';
-		path = path + 'M' + (center[0] + R * _sin(337.5 / 180 * PI)) + ' ' +  (center[1]  - R * _cos(337.5 / 180 * PI)); 
-		path = path + ' L' + (center[0] + (R + R / 2) * _sin(337.5 / 180 * PI)) + ' ' + (center[1] - (R + R / 2) * _cos(337.5 / 180 * PI));
-		path = path + ' A' + (R + R / 2) + ' ' + (R + R / 2) + ' 22.5 0 1 ' + (center[0] + (R + R / 2) * _sin(360 / 180 * PI)) + ' ' + (center[1] - (R + R / 2) * _cos(360 / 180 * PI));
-		path = path + ' L' + (center[0] + R * _sin(360 / 180 * PI)) + ' ' +  (center[1]  - R * _cos(360 / 180 * PI));
-		path = path + ' A' + R + ' ' + R + ' 22.5 0 0 ' + (center[0] + R * _sin(360 / 180 * PI)) + ' ' +  (center[1]  - R * _cos(360 / 180 * PI));
-		svg.path(g, path);
 		
-		// ‰∏≠ÂøÉ
+		$(g3).click(function(){
+			console.log('º‡∂Ω≥È≤È');
+			piemunuDatas[' ˝æ›¿‡–Õ']['º‡∂Ω≥È≤È'].click();
+		});
+		path = '';// 'M25 125 L85 125 A40 40 90 0 1 125 85 L125 25 A100 100 90
+					// 0 0 25 125';
+		path = path + 'M' + (center[0] - R) + ' ' + center[1];
+		path = path + ' L' + (center[0] - R - R / 2) + ' ' + center[1];
+		path = path + ' A' + (R + R / 2) + ' ' + (R + R / 2) + ' 22.5 0 1 '
+				+ (center[0] + (R + R / 2) * _sin(292.5 / 180 * PI)) + ' '
+				+ (center[1] - (R + R / 2) * _cos(292.5 / 180 * PI));
+		path = path + ' L' + (center[0] + R * _sin(292.5 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(292.5 / 180 * PI));
+		path = path + ' A' + R + ' ' + R + ' 22.5 0 0 ' + (center[0] - R) + ' '
+				+ center[1];
+		svg.path(g3, path);
+
+		per = 90 / 4;
+		x = center[0] + R * 3 / 2 * _sin((270 + per / 2) / 180 * PI);
+		x += 5;
+		y = center[1] - R * 3 / 2 * _cos((270 + per / 2) / 180 * PI);
+		y -= 5;
+		svg.text(g3, x, y, "º‡∂Ω≥È≤È", {
+			fill : 'black',
+			stroke : 'black',
+			'stroke-width' : 1,
+			'transform' : 'rotate(' + (per / 2) + ',' + x + ',' + y + ')'
+		});
+		//∑Áœ’º‡≤‚
+		g3 = svg.group(g, {
+			fill : 'url(#gradient1)',
+			id : 'group4__2__2',
+			strokeWidth : 2,
+			stroke : 'rgba(204,204,204,.3)',
+			display : 'none'
+		});
+		
+		$(g3).click(function(){
+			console.log('∑Áœ’º‡≤‚');
+			piemunuDatas[' ˝æ›¿‡–Õ']['∑Áœ’º‡≤‚'].click();
+		});
+
+		path = '';// 'M25 125 L85 125 A40 40 90 0 1 125 85 L125 25 A100 100 90
+					// 0 0 25 125';
+		path = path + 'M' + (center[0] + R * _sin(292.5 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(292.5 / 180 * PI));
+		path = path + ' L' + (center[0] + (R + R / 2) * _sin(292.5 / 180 * PI))
+				+ ' ' + (center[1] - (R + R / 2) * _cos(292.5 / 180 * PI));
+		path = path + ' A' + (R + R / 2) + ' ' + (R + R / 2) + ' 22.5 0 1 '
+				+ (center[0] + (R + R / 2) * _sin(315 / 180 * PI)) + ' '
+				+ (center[1] - (R + R / 2) * _cos(315 / 180 * PI));
+		path = path + ' L' + (center[0] + R * _sin(315 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(315 / 180 * PI));
+		path = path + ' A' + R + ' ' + R + ' 22.5 0 0 '
+				+ (center[0] + R * _sin(292.5 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(292.5 / 180 * PI));
+		svg.path(g3, path);
+
+		per = 90 / 4;
+		x = center[0] + R * 3 / 2 * _sin((270 + per / 2 + per) / 180 * PI);
+		x += 5;
+		y = center[1] - R * 3 / 2 * _cos((270 + per / 2 + per) / 180 * PI);
+		y -= 5;
+		svg.text(g3, x, y, " ∑Áœ’º‡≤‚", {
+			fill : 'black',
+			stroke : 'black',
+			'stroke-width' : 1,
+			'transform' : 'rotate(' + (per / 2 + per) + ',' + x + ',' + y + ')'
+		});
+		
+		//∆Û“µ◊‘ºÏ
+		g3 = svg.group(g, {
+			fill : 'url(#gradient1)',
+			id : 'group4__2__3',
+			strokeWidth : 2,
+			stroke : 'rgba(204,204,204,.3)',
+			display : 'none'
+		});
+		
+		$(g3).click(function(){
+			console.log('∆Û“µ◊‘ºÏ');
+			piemunuDatas[' ˝æ›¿‡–Õ']['∆Û“µ◊‘ºÏ'].click();
+		});
+
+		path = '';// 'M25 125 L85 125 A40 40 90 0 1 125 85 L125 25 A100 100 90
+					// 0 0 25 125';
+		path = path + 'M' + (center[0] + R * _sin(315 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(315 / 180 * PI));
+		path = path + ' L' + (center[0] + (R + R / 2) * _sin(315 / 180 * PI))
+				+ ' ' + (center[1] - (R + R / 2) * _cos(315 / 180 * PI));
+		path = path + ' A' + (R + R / 2) + ' ' + (R + R / 2) + ' 22.5 0 1 '
+				+ (center[0] + (R + R / 2) * _sin(337.5 / 180 * PI)) + ' '
+				+ (center[1] - (R + R / 2) * _cos(337.5 / 180 * PI));
+		path = path + ' L' + (center[0] + R * _sin(337.5 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(337.5 / 180 * PI));
+		path = path + ' A' + R + ' ' + R + ' 22.5 0 0 '
+				+ (center[0] + R * _sin(315 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(315 / 180 * PI));
+		svg.path(g3, path);
+
+		per = 90 / 4;
+		x = center[0] + R * 3 / 2 * _sin((270 + per / 2 + per * 2) / 180 * PI);
+		x += 5;
+		y = center[1] - R * 3 / 2 * _cos((270 + per / 2 + per * 2) / 180 * PI);
+		y -= 5;
+		svg.text(g3, x, y, "∆Û“µ◊‘ºÏ", {
+			fill : 'black',
+			stroke : 'black',
+			'stroke-width' : 1,
+			'transform' : 'rotate(' + (per / 2 + per * 2) + ',' + x + ',' + y
+					+ ')'
+		});
+		
+		//øÏÀŸºÏ≤‚
+		g3 = svg.group(g, {
+			fill : 'url(#gradient1)',
+			id : 'group4__2__4',
+			strokeWidth : 2,
+			stroke : 'rgba(204,204,204,.3)',
+			display : 'none'
+		});
+		
+		$(g3).click(function(){
+			console.log('øÏÀŸºÏ≤‚');
+			piemunuDatas[' ˝æ›¿‡–Õ']['øÏÀŸºÏ≤‚'].click();
+		});
+
+		path = '';// 'M25 125 L85 125 A40 40 90 0 1 125 85 L125 25 A100 100 90
+					// 0 0 25 125';
+		path = path + 'M' + (center[0] + R * _sin(337.5 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(337.5 / 180 * PI));
+		path = path + ' L' + (center[0] + (R + R / 2) * _sin(337.5 / 180 * PI))
+				+ ' ' + (center[1] - (R + R / 2) * _cos(337.5 / 180 * PI));
+		path = path + ' A' + (R + R / 2) + ' ' + (R + R / 2) + ' 22.5 0 1 '
+				+ (center[0] + (R + R / 2) * _sin(360 / 180 * PI)) + ' '
+				+ (center[1] - (R + R / 2) * _cos(360 / 180 * PI));
+		path = path + ' L' + (center[0] + R * _sin(360 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(360 / 180 * PI));
+		path = path + ' A' + R + ' ' + R + ' 22.5 0 0 '
+				+ (center[0] + R * _sin(360 / 180 * PI)) + ' '
+				+ (center[1] - R * _cos(360 / 180 * PI));
+		svg.path(g3, path);
+
+		per = 90 / 4;
+		x = center[0] + R * 3 / 2 * _sin((270 + per / 2 + per * 3) / 180 * PI);
+		x += 5;
+		y = center[1] - R * 3 / 2 * _cos((270 + per / 2 + per * 3) / 180 * PI);
+		y -= 5;
+		svg.text(g3, x, y, "øÏÀŸºÏ≤‚", {
+			fill : 'black',
+			stroke : 'black',
+			'stroke-width' : 1,
+			'transform' : 'rotate(' + (per / 2 + per * 3) + ',' + x + ',' + y
+					+ ')'
+		});
+
+		// ÷––ƒ
 		g = svg.group({
 			fill : 'url(#gradient1)',
 			id : 'groupd',
@@ -482,19 +866,16 @@ function drawInitial(svg, settings) {
 				function() {
 					$(this).attr('fill', 'url(#gradient1)').attr('stroke',
 							'rgba(204,204,204,.3)').css('cursor', 'default');
-				});
-
-		$('#group8').click(function() {
-			var dis = $('#group0').css('display');
-			if ('none' == dis) {
-				$('g:not(#group8)').show();
-			} else {
-				$('g:not(#group8)').hide();
-			}
-		});
-
-		$('#group1').click(function() {
-
+				}).click(function() {
+					var id = $(this).attr('id');
+					var children = $('g[id^='+id+'__]');
+					if(children.length == 0)
+						return;
+					if ('none' != children.css('display')) {
+						children.css('display', 'none');
+					} else {
+						children.css('display', 'block');
+					}
 		});
 	};
 
@@ -525,25 +906,3 @@ $.svg._afterLoad = function(container, svg, settings) {
 		alert(e);
 	}
 };
-
-$('dom').click(function(){
-	
-});
-
-$(function() {
-	$('#menu').svg({
-		onLoad : drawInitial,
-		datas : {
-			"Êï∞ÊçÆÁ±ªÂûã":{
-				'ÁõëÁù£ÊäΩÊü•':{
-					click:function(e){
-						console.log(1);
-					}
-				},
-				'È£éÈô©ÁõëÊµã':{
-					
-				}
-			}
-		}
-	});
-});
