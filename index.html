@@ -8,12 +8,14 @@
 	href="js/jquery.svg/jquery.svg.css">
 <script type="text/javascript" src='js/jquery-1.9.1.js'></script>
 <script type="text/javascript" src='js/jquery.svg/jquery.svg.js'></script>
+<script type="text/javascript" src='js/menu-datas.js'></script>
 <script type="text/javascript" src='js/jquery-svg-menu.js'></script>
 
 <script type="text/javascript">
 $(function(){
 	$("#menu").svg({
-		onLoad : drawInitial
+		onLoad : drawInitial,
+		datas : piemunuDatas
 	});
 });
 </script>
