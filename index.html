@@ -12,6 +12,7 @@
 <script type="text/javascript" src='js/jquery-svg-menu.js'></script>
 
 <script type="text/javascript">
+var piemunuDatas = [ {value : 'A',click : function(e, obj) {console.log(e, obj);},children : [ {value : 'a',click : function(e, obj) {console.log(e, obj);}}, {value : 'b',click : function(e, obj) {console.log(e, obj);}}, {value : 'c',click : function(e, obj) {console.log(e, obj);}}, {value : 'd',click : function(e, obj) {console.log(e, obj);}}, {value : 'e',click : function(e, obj) {console.log(e, obj);}} ]}, {value : 'B',click : function(e, obj) {console.log(e, obj);},children : [ {value : 'b1',click : function(e, obj) {console.log(e, obj);}}, {value : 'b2',click : function(e, obj) {console.log(e, obj);}} ]}, {value : 'C',click : function(e, obj) {console.log(e, obj);},children : []} ];
 $(function(){
 	$("#menu").svg({
 		onLoad : drawInitial,
