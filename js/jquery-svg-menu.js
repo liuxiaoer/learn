@@ -5,72 +5,343 @@
  */
 
 var menu;
+var events = {};
 function drawInitial(svg, settings) {
 	var center = [ 175, 175 ];
 	var R = 100, r = 40, PI = Math.PI;
-	var w3 = 100;// µÚÈı²ã²Ëµ¥¿í¶È
+	var w3 = 50;// ç¬¬ä¸‰å±‚èœå•å®½åº¦
+	var r3 = R + w3;
+	var translate = {};
+
+	if (settings.center) {
+		center = settings.center;
+	}
+	if (settings.R) {
+		R = settings.R;
+	}
+	if (settings.r) {
+		r = settings.r;
+	}
+	if (settings.w3) {
+		w3 = settings.w3;
+	}
+
+	var _radialGradient = {
+		level1 : {
+			color1 : {
+				color : [ '#ffffff', '#FD67FE', '#ffffff' ],
+				hover_color : [ '#ffffff', '#FD67FE', '#ffffff' ],
+				cColor : [// children color
+				]
+			},
+			color2 : {
+				color : [ '#ffffff', '#5AA8A6', '#ffffff' ],
+				hover_color : [ '#ffffff', '#5AA8A6', '#ffffff' ],
+				cColor : [// children color
+				]
+			},
+			color3 : {
+				color : [ '#ffffff', '#019702', '#ffffff' ],
+				hover_color : [ '#ffffff', '#019702', '#ffffff' ],
+				cColor : [// children color
+				]
+			},
+			color4 : {
+				color : [ '#ffffff', '#019702', '#ffffff' ],
+				hover_color : [ '#ffffff', '#FE4500', '#ffffff' ],
+				cColor : [// children color
+				]
+			},
+			color5 : {
+				color : [ '#ffffff', '#FE4500', '#ffffff' ],
+				hover_color : [ '#ffffff', '#FE4500', '#ffffff' ],
+				cColor : [// children color
+				]
+			},
+			color6 : {
+				color : [ '#ffffff', '#FE4500', '#ffffff' ],
+				hover_color : [ '#ffffff', '#FE4500', '#ffffff' ],
+				cColor : [// children color
+				]
+			},
+			color7 : {
+				color : [ '#ffffff', '#FE4500', '#ffffff' ],
+				hover_color : [ '#ffffff', '#FE4500', '#ffffff' ],
+				cColor : [// children color
+				]
+			},
+			color8 : {
+				color : [ '#ffffff', '#FE4500', '#ffffff' ],
+				hover_color : [ '#ffffff', '#FE4500', '#ffffff' ],
+				cColor : [// children color
+				]
+			}
+		}
+	};
+
+	var _config = {
+		center : {
+			stroke : 'rgba(204,204,204,.3)',
+			strokeWidth : 2
+		},
+		level1 : {},
+		level2 : {
+			stops : [ [ 0, '#ffffff', 1 ], [ .5, '#FD67FE', 1 ],
+					[ 1, '#ffffff', 1 ] ],
+			stroke : 'rgba(204,204,204,.8)',
+			strokeWidth : 2
+		},
+		level3 : {
+			stops : [ [ 0, 'rgb(204,204,204)', .1 ], [ .5, '#FD67FE', .7 ],
+					[ 1, '#ffffff', .1 ] ]
+		}
+	};
+	var _datas = settings.datas;
+	var _len = _datas.length;
 
 	var _addEvents = function(node) {
 	};
 
 	var _sin = function(x) {
-		return Math.sin(x);
+		return Math.sin(x / 180 * Math.PI);
 	};
 
 	var _cos = function(x) {
-		return Math.cos(x);
-	};
-
-	_drawNode = function(data) {
-	};
-
-	_drawNodes = function() {
-		for (data in datas) {
-			_drawNode(data);
-		}
+		return Math.cos(x / 180 * Math.PI);
 	};
 
 	_default = function() {
-
 		var g = svg.group();
 
-		// ½¥±äÉ«
+		// æ¸å˜è‰²
 		var defs = svg.defs(g);
-		var stop0 = [ 0.5, 'rgb(204,204,204)', .1 ];
-		var stop1 = [ .75, 'rgb(204,204,204)', .5 ];
-		var stop2 = [ 1, 'rgb(204,204,204)', .1 ];
-		var radialGradient = svg.radialGradient(defs, 'gradient1', [ stop0,
-				stop1, stop2 ], center[0], center[1], R, center[0], center[1],
-				{
+		var radialGradient = svg.radialGradient(defs, 'gradient1',
+				_config.level2.stops, center[0], center[1], R, center[0],
+				center[1], {
 					gradientUnits : 'userSpaceOnUse'
 				});
 
-		var stop0 = [ 0.5, 'rgb(204,204,204)', .1 ];
-		var stop1 = [ .75, 'rgb(204,204,204)', .7 ];
-		var stop2 = [ 1, 'rgb(204,204,204)', .1 ];
-		var radialGradient = svg.radialGradient(defs, 'gradient2', [ stop0,
-				stop1, stop2 ], center[0], center[1], R, center[0], center[1],
-				{
+		var radialGradient = svg.radialGradient(defs, 'gradient2',
+				_config.level3.stops, center[0], center[1], R + w3, center[0],
+				center[1], {
 					gradientUnits : 'userSpaceOnUse'
 				});
 
-		// Ìõ¼şÑ¡Ïî
+		// _drawCenter();
+		g = svg.group({
+			fill : 'url(#gradient1)',
+			strokeWidth : _config.center.strokeWidth,
+			stroke : _config.center.stroke
+		});
+		svg.circle(g, center[0], center[1], 30);
+		svg.text(g, center[0] - 15, center[0] + 5, 'å…³é—­', {
+			fill : 'black',
+			stroke : 'black',
+			'stroke-width' : 1
+		});
+		$(g).mouseover(function() {
+			$(this).css({
+				'fill' : 'url(#gradient2)',
+				'cursor' : 'pointer'
+			});
+		}).mouseout(function() {
+			$(this).css({
+				'fill' : 'url(#gradient1)',
+				'cursor' : 'default'
+			});
+		}).click(function(e) {
+			$(svg._container).css('z-index', -1).hide();
+		});
+
+		for ( var i = 0; i < _len; i++) {
+			var data = _datas[i];
+			var value = data.value;
+			var children = data.children;
+			var cs = children.length;
+			var angel = 360 / _len;
+
+			// level2
+			var g = svg.group({
+				fill : 'url(#gradient1)',
+				id : 'group' + i + '__1',
+				strokeWidth : _config.level2.strokeWidth,
+				stroke : _config.level2.stroke
+			});
+
+			// level3
+			var g2 = svg.group(g, {
+				fill : 'url(#gradient1)',
+				id : 'group' + i + '__2',
+				'class' : 'hoverable',
+				strokeWidth : _config.level2.strokeWidth,
+				stroke : _config.level2.stroke
+			});
+			events['group' + i + '__2'] = events['group' + i + '__2'] == undefined ? {}
+					: events['group' + i + '__2'];
+			events['group' + i + '__2'].click = piemunuDatas[i].click;
+
+			// path ä¸­è§’å¹³åˆ†çº¿è§’åº¦
+			var bisects = (angel / 2) + angel * i;
+			var translateX = 10 * _sin(bisects);
+			var translateY = 10 * _cos(bisects);
+			translate[g2.id] = 'translate(' + translateX + ',' + -1
+					* translateY + ')';
+			$(g2).mouseover(
+					function() {
+						$(this).css({
+							'fill' : 'url(#gradient2)',
+							'cursor' : 'pointer'
+						});
+						$('g[id^=' + this.id + ']').attr('transform',
+								translate[this.id]);// pathä¸­å¿ƒå‘å¤„ç§»åŠ¨10px
+					}).mouseout(
+					function() {
+						$(this).css({
+							'fill' : 'url(#gradient1)',
+							'cursor' : 'default'
+						});
+						$('g[id^=' + this.id + ']').attr('transform',
+								'translate(0,0)');// pathä¸­å¿ƒå‘å¤„ç§»åŠ¨10px
+					}).click(function(e) {
+				if (events[this.id].show) {
+					$('g[id^=' + this.id + '__]').hide();
+					events[this.id].show = false;
+				} else {
+					$('g[id^=' + this.id + '__]').show();
+					events[this.id].show = true;
+				}
+				events[this.id].click(e, this);
+			});
+
+			// drawPath
+			var path = '';
+			path = path + 'M' + (center[0] + r * _sin(angel * i)) + ' '
+					+ (center[1] - r * _cos(angel * i));
+			path = path + ' L' + (center[0] + R * _sin(angel * i)) + ' '
+					+ (center[1] - R * _cos(angel * i));
+			path = path + ' A' + R + ' ' + R + ' ' + angel + ' 0 1 '
+					+ (center[0] + R * _sin(angel * (i + 1))) + ' '
+					+ (center[1] - R * _cos(angel * (i + 1)));
+			path = path + ' L' + (center[0] + r * _sin(angel * (i + 1))) + ' '
+					+ (center[1] - r * _cos(angel * (i + 1)));
+			path = path + ' A' + r + ' ' + r + ' ' + angel + ' 0 0 '
+					+ (center[0] + r * _sin(angel * i)) + ' '
+					+ (center[1] - r * _cos(angel * i));
+			svg.path(g2, path);
+
+			// drawValue
+			var vs = value.length;
+			vangel = angel / (vs + 1);
+			for ( var v = 0; v < vs; v++) {
+				var sin = _sin(vangel * (v + 1) + angel * i);
+				var cos = _cos(vangel * (v + 1) + angel * i);
+				x = center[0] + R * .6 * sin;
+				y = center[1] - R * .6 * cos;
+				var xflag = sin > 0 ? 1 : -1;
+				var yflag = cos > 0 ? -1 : 1;
+
+				svg.text(g2, x, y, value[v], {
+					fill : 'black',
+					stroke : 'black',
+					'transform' : 'rotate(' + (vangel * (v + 1)) + ','
+							+ (x + 5) + ',' + (y - 5) + ')',
+					'stroke-width' : 1
+				});
+			}
+
+			// drawChildren
+			cangel = angel / cs; // childrenè§’åº¦
+			for ( var j = 0; j < cs; j++) {
+				var g2 = svg.group(g, {
+					fill : 'url(#gradient1)',
+					id : 'group' + i + '__2__' + j,
+					'class' : 'hoverable',
+					strokeWidth : _config.level2.strokeWidth,
+					stroke : _config.level2.stroke,
+					display : 'none'
+				});
+				var child = children[j];
+				events['group' + i + '__2__' + j] = events['group' + i
+						+ '__2__' + j] == undefined ? {} : events['group' + i
+						+ '__2__' + j];
+				events['group' + i + '__2__' + j].click = piemunuDatas[i].children[j].click;
+
+				// path ä¸­è§’å¹³åˆ†çº¿è§’åº¦
+				bisects = (cangel / 2) + angel * i + cangel * j;
+				translateX = 10 * _sin(bisects);
+				translateY = 10 * _cos(bisects);
+				translate[g2.id] = 'translate(' + translateX + ',' + -1
+						* translateY + ')';
+
+				$(g2).mouseover(
+						function() {
+							$(this).css({
+								'fill' : 'url(#gradient2)',
+								'cursor' : 'pointer'
+							});
+							$('g[id^=' + this.id + ']').attr('transform',
+									translate[this.id]);// pathä¸­å¿ƒå‘å¤„ç§»åŠ¨10px
+						}).mouseout(
+						function() {
+							$(this).css({
+								'fill' : 'url(#gradient1)',
+								'cursor' : 'default'
+							});
+							$('g[id^=' + this.id + ']').attr('transform',
+									'translate(0,0)');// pathä¸­å¿ƒå‘å¤„ç§»åŠ¨10px
+						}).click(function(e) {
+					events[this.id].click(e, this);
+				});
+				var path = '';
+				tangel = cangel * j + angel * i;
+				tangel1 = cangel * (j + 1) + angel * i;
+				path = path + 'M' + (center[0] + R * _sin(tangel)) + ' '
+						+ (center[1] - R * _cos(tangel));
+				path = path + ' L' + (center[0] + r3 * _sin(tangel)) + ' '
+						+ (center[1] - r3 * _cos(tangel));
+				path = path + ' A' + r3 + ' ' + r3 + ' ' + cangel + ' 0 1 '
+						+ (center[0] + r3 * _sin(tangel1)) + ' '
+						+ (center[1] - r3 * _cos(tangel1));
+				path = path + ' L' + (center[0] + R * _sin(tangel1)) + ' '
+						+ (center[1] - R * _cos(tangel1));
+				path = path + ' A' + R + ' ' + R + ' ' + cangel + ' 0 0 '
+						+ (center[0] + R * _sin(tangel)) + ' '
+						+ (center[1] - R * _cos(tangel));
+				svg.path(g2, path);
+
+				value = child.value;
+				// å­—
+
+				x = center[0] + (w3 + R) * .7 * _sin(tangel + cangel / 2);
+				y = center[1] - (w3 + R) * .7 * _cos(tangel + cangel / 2);
+
+				svg.text(g2, x, y, value, {
+					fill : 'black',
+					stroke : 'black',
+					'transform' : 'rotate(' + (tangel + cangel / 2 - 90) + ','
+							+ (x + 5) + ',' + (y - 5) + ')',
+					'stroke-width' : 1
+				});
+			}
+		}
+		return;
+		// æ¡ä»¶é€‰é¡¹
 		var g = svg.group({
 			fill : 'url(#gradient1)',
 			id : 'group1__1',
-			strokeWidth : 2,
-			stroke : 'rgba(204,204,204,.3)'
+			strokeWidth : _config.level2.strokeWidth,
+			stroke : _config.level2.stroke
 		});
 
-		var g2 = svg.group(g,{
+		var g2 = svg.group(g, {
 			fill : 'url(#gradient1)',
 			id : 'group1__2',
-			strokeWidth : 2,
-			stroke : 'rgba(204,204,204,.3)'
+			strokeWidth : _config.level2.strokeWidth,
+			stroke : _config.level2.stroke
 		});
-		
+
 		var path = '';// 'M125 25 L125 85 A40 40 90 0 1 165 125 L225 125 A100
-						// 100 90 0 0 125 25';
+		// 100 90 0 0 125 25';
 		path = path + 'M' + center[0] + ' ' + (center[1] - R);
 		path = path + ' L' + center[0] + ' ' + (center[1] - r);
 		path = path + ' A' + r + ' ' + r + ' 90 0 1 ' + (center[0] + r) + ' '
@@ -80,13 +351,13 @@ function drawInitial(svg, settings) {
 				+ (center[1] - R);
 		svg.path(g2, path);
 
-		// svg.text(g,165,85,"Ìõ¼şÑ¡Ïî",{fill:'black',stroke:'none'});
+		// svg.text(g,165,85,"æ¡ä»¶é€‰é¡¹",{fill:'black',stroke:'none'});
 		x = center[0] + .65 * R * _sin(18 / 180 * PI);
 		x -= 5;
 		y = center[1] - .65 * R * _cos(18 / 180 * PI);
 		y -= 5;
 
-		svg.text(g2, x, y, "Ìõ", {
+		svg.text(g2, x, y, "æ¡", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -97,7 +368,7 @@ function drawInitial(svg, settings) {
 		y = center[1] - .65 * R * _cos(36 / 180 * PI);
 		y -= 5;
 
-		svg.text(g2, x, y, "¼ş", {
+		svg.text(g2, x, y, "ä»¶", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -108,7 +379,7 @@ function drawInitial(svg, settings) {
 		y = center[1] - .65 * R * _cos(54 / 180 * PI);
 		y -= 5;
 
-		svg.text(g2, x, y, "Ñ¡", {
+		svg.text(g2, x, y, "é€‰", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -118,7 +389,7 @@ function drawInitial(svg, settings) {
 		x -= 5;
 		y = center[1] - .65 * R * _cos(72 / 180 * PI);
 		y -= 5;
-		svg.text(g2, x, y, "Ïî", {
+		svg.text(g2, x, y, "é¡¹", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -132,12 +403,12 @@ function drawInitial(svg, settings) {
 			stroke : 'rgba(204,204,204,.3)',
 			display : 'none'
 		});
-		
-		$(g3).click(function(){
-			console.log('Ê³Æ·ÖÖÀà');
-			piemunuDatas['Ìõ¼şÑ¡Ïî']['Ê³Æ·ÖÖÀà'].click();
+
+		$(g3).click(function() {
+			console.log('é£Ÿå“ç§ç±»');
+			piemunuDatas['æ¡ä»¶é€‰é¡¹']['é£Ÿå“ç§ç±»'].click();
 		});
-		
+
 		var path = '';
 		// var path = 'M125 25 L125 85 A40 40 90 0 1 165 125 L225 125 A100 100
 		// 90 0 0 125 25';
@@ -156,7 +427,7 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - R * _cos(15 / 180 * PI);
 		y -= 5;
-		svg.text(g3, x, y, "Ê³Æ·ÖÖÀà", {
+		svg.text(g3, x, y, "é£Ÿå“ç§ç±»", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -170,12 +441,11 @@ function drawInitial(svg, settings) {
 			stroke : 'rgba(204,204,204,.3)',
 			display : 'none'
 		});
-		
-		$(g3).click(function(){
-			console.log('³éÑùµØµã');
-			piemunuDatas['Ìõ¼şÑ¡Ïî']['³éÑùµØµã'].click();
+
+		$(g3).click(function() {
+			console.log('æŠ½æ ·åœ°ç‚¹');
+			piemunuDatas['æ¡ä»¶é€‰é¡¹']['æŠ½æ ·åœ°ç‚¹'].click();
 		});
-		
 
 		path = '';
 		path = path + 'M' + (center[0] + R * _sin(30 / 180 * PI)) + ' '
@@ -196,7 +466,7 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - R * _cos(45 / 180 * PI);
 		y -= 5;
-		svg.text(g3, x, y, "³éÑùµØµã", {
+		svg.text(g3, x, y, "æŠ½æ ·åœ°ç‚¹", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -210,10 +480,10 @@ function drawInitial(svg, settings) {
 			stroke : 'rgba(204,204,204,.3)',
 			display : 'none'
 		});
-		
-		$(g3).click(function(){
-			console.log('³éÑùÇøÏØ');
-			piemunuDatas['Ìõ¼şÑ¡Ïî']['³éÑùÇøÏØ'].click();
+
+		$(g3).click(function() {
+			console.log('æŠ½æ ·åŒºå¿');
+			piemunuDatas['æ¡ä»¶é€‰é¡¹']['æŠ½æ ·åŒºå¿'].click();
 		});
 
 		path = '';
@@ -235,28 +505,28 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - R * _cos(75 / 180 * PI);
 		y -= 5;
-		svg.text(g3, x, y, "³éÑùÇøÏØ", {
+		svg.text(g3, x, y, "æŠ½æ ·åŒºå¿", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
 			'transform' : 'rotate(-15,' + x + ',' + y + ')'
 		});
 
-		// ÏÔÊ¾ÀàĞÍ
+		// æ˜¾ç¤ºç±»å‹
 		g = svg.group({
 			fill : 'url(#gradient1)',
 			id : 'group2__1',
 			strokeWidth : 2,
 			stroke : 'rgba(204,204,204,.3)'
 		});
-		g2 = svg.group(g,{
+		g2 = svg.group(g, {
 			fill : 'url(#gradient1)',
 			id : 'group2__2',
 			strokeWidth : 2,
 			stroke : 'rgba(204,204,204,.3)'
 		});
 		var path = '';// 'M225 125 L165 125 A40 40 90 0 1 125 165 L125 225
-						// A100 100 90 0 0 225 125';
+		// A100 100 90 0 0 225 125';
 		path = path + 'M' + (center[0] + R) + ' ' + center[1];
 		path = path + ' L' + (center[0] + r) + ' ' + center[1];
 		path = path + ' A' + r + ' ' + r + ' 90 0 1 ' + center[0] + ' '
@@ -270,7 +540,7 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - .65 * R * _cos(108 / 180 * PI);
 		y -= 5;
-		svg.text(g2, x, y, "ÏÔ", {
+		svg.text(g2, x, y, "æ˜¾", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -281,7 +551,7 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - .65 * R * _cos(126 / 180 * PI);
 		y -= 5;
-		svg.text(g2, x, y, "Ê¾", {
+		svg.text(g2, x, y, "ç¤º", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -292,7 +562,7 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - .65 * R * _cos(144 / 180 * PI);
 		y -= 5;
-		svg.text(g2, x, y, "Àà", {
+		svg.text(g2, x, y, "ç±»", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -303,15 +573,15 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - .65 * R * _cos(162 / 180 * PI);
 		y -= 5;
-		svg.text(g2, x, y, "ĞÍ", {
+		svg.text(g2, x, y, "å‹", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
 			'transform' : 'rotate(162,' + x + ',' + y + ')'
 		});
-		// svg.text(g,x,y,"ÏÔÊ¾ÀàĞÍ",{fill:'black',stroke:'none'});
-		// ÏÔÊ¾ÀàĞÍ-->
-		//µØÍ¼
+		// svg.text(g,x,y,"æ˜¾ç¤ºç±»å‹",{fill:'black',stroke:'none'});
+		// æ˜¾ç¤ºç±»å‹-->
+		// åœ°å›¾
 		g3 = svg.group(g, {
 			fill : 'url(#gradient1)',
 			id : 'group2__2__1',
@@ -319,9 +589,9 @@ function drawInitial(svg, settings) {
 			stroke : 'rgba(204,204,204,.3)',
 			display : 'none'
 		});
-		$(g3).click(function(){
-			console.log('µØÍ¼');
-			piemunuDatas['ÏÔÊ¾ÀàĞÍ']['µØÍ¼'].click();
+		$(g3).click(function() {
+			console.log('åœ°å›¾');
+			piemunuDatas['æ˜¾ç¤ºç±»å‹']['åœ°å›¾'].click();
 		});
 		path = '';
 		path = path + 'M' + (center[0] + R) + ' ' + center[1];
@@ -342,14 +612,14 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - R * _cos((90 + per * 1) / 180 * PI);
 		y -= 5;
-		svg.text(g3, x, y, "µØÍ¼", {
+		svg.text(g3, x, y, "åœ°å›¾", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
 			'transform' : 'rotate(' + per / 2 + ',' + x + ',' + y + ')'
 		});
-		
-		//±ıÍ¼
+
+		// é¥¼å›¾
 		g3 = svg.group(g, {
 			fill : 'url(#gradient1)',
 			id : 'group2__2__2',
@@ -357,9 +627,9 @@ function drawInitial(svg, settings) {
 			stroke : 'rgba(204,204,204,.3)',
 			display : 'none'
 		});
-		$(g3).click(function(){
-			console.log('±ıÍ¼');
-			piemunuDatas['ÏÔÊ¾ÀàĞÍ']['±ıÍ¼'].click();
+		$(g3).click(function() {
+			console.log('é¥¼å›¾');
+			piemunuDatas['æ˜¾ç¤ºç±»å‹']['é¥¼å›¾'].click();
 		});
 		path = '';
 		path = path + 'M' + (center[0] + R * _sin(112.5 / 180 * PI)) + ' '
@@ -381,14 +651,14 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - R * _cos((90 + per * 2) / 180 * PI);
 		y -= 5;
-		svg.text(g3, x, y, "±ıÍ¼", {
+		svg.text(g3, x, y, "é¥¼å›¾", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
 			'transform' : 'rotate(' + (per + per / 2) + ',' + x + ',' + y + ')'
 		});
-		
-		//Ç÷ÊÆÍ¼
+
+		// è¶‹åŠ¿å›¾
 		g3 = svg.group(g, {
 			fill : 'url(#gradient1)',
 			id : 'group2__2__3',
@@ -396,9 +666,9 @@ function drawInitial(svg, settings) {
 			stroke : 'rgba(204,204,204,.3)',
 			display : 'none'
 		});
-		$(g3).click(function(){
-			console.log('Ç÷ÊÆÍ¼');
-			piemunuDatas['ÏÔÊ¾ÀàĞÍ']['Ç÷ÊÆÍ¼'].click();
+		$(g3).click(function() {
+			console.log('è¶‹åŠ¿å›¾');
+			piemunuDatas['æ˜¾ç¤ºç±»å‹']['è¶‹åŠ¿å›¾'].click();
 		});
 
 		path = '';
@@ -421,7 +691,7 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - R * _cos((90 + per * 3) / 180 * PI);
 		y -= 5;
-		svg.text(g3, x, y, "Ç÷ÊÆÍ¼", {
+		svg.text(g3, x, y, "è¶‹åŠ¿å›¾", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -429,7 +699,7 @@ function drawInitial(svg, settings) {
 					+ ')'
 		});
 
-		//·ÖÎöÍ¼
+		// åˆ†æå›¾
 		g3 = svg.group(g, {
 			fill : 'url(#gradient1)',
 			id : 'group2__2__4',
@@ -437,9 +707,9 @@ function drawInitial(svg, settings) {
 			stroke : 'rgba(204,204,204,.3)',
 			display : 'none'
 		});
-		$(g3).click(function(){
-			console.log('²»ºÏ¸ñ²úÆ··ÖÎöÍ¼');
-			piemunuDatas['ÏÔÊ¾ÀàĞÍ']['²»ºÏ¸ñ²úÆ··ÖÎöÍ¼'].click();
+		$(g3).click(function() {
+			console.log('ä¸åˆæ ¼äº§å“åˆ†æå›¾');
+			piemunuDatas['æ˜¾ç¤ºç±»å‹']['ä¸åˆæ ¼äº§å“åˆ†æå›¾'].click();
 		});
 		path = '';
 		path = path + 'M' + (center[0] + R * _sin(157.5 / 180 * PI)) + ' '
@@ -461,7 +731,7 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - R * _cos((90 + per * 4) / 180 * PI);
 		y -= 5;
-		svg.text(g3, x, y, "·ÖÎöÍ¼", {
+		svg.text(g3, x, y, "åˆ†æå›¾", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -469,21 +739,21 @@ function drawInitial(svg, settings) {
 					+ ')'
 		});
 
-		// ·ÖÎöÀàĞÍ
+		// åˆ†æç±»å‹
 		g = svg.group({
 			fill : 'url(#gradient1)',
 			id : 'group3__1',
 			strokeWidth : 2,
 			stroke : 'rgba(204,204,204,.3)'
 		});
-		g2 = svg.group(g,{
+		g2 = svg.group(g, {
 			fill : 'url(#gradient1)',
 			id : 'group3__2',
 			strokeWidth : 2,
 			stroke : 'rgba(204,204,204,.3)'
 		});
 		path = '';// 'M125 225 L125 165 A40 40 90 0 1 85 125 L25 125 A100 100
-					// 90 0 0 125 225';
+		// 90 0 0 125 225';
 		path = path + 'M' + center[0] + ' ' + (center[1] + R);
 		path = path + ' L' + center[0] + ' ' + (center[1] + r);
 		path = path + ' A' + r + ' ' + r + ' 90 0 1 ' + (center[0] - r) + ' '
@@ -496,7 +766,7 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - .65 * R * _cos(198 / 180 * PI);
 		y += 5;
-		svg.text(g2, x, y, "·Ö", {
+		svg.text(g2, x, y, "åˆ†", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -508,7 +778,7 @@ function drawInitial(svg, settings) {
 		y = center[1] - .65 * R * _cos(216 / 180 * PI);
 		y += 5;
 
-		svg.text(g2, x, y, "Îö", {
+		svg.text(g2, x, y, "æ", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -519,7 +789,7 @@ function drawInitial(svg, settings) {
 		y = center[1] - .65 * R * _cos(234 / 180 * PI);
 		y += 5;
 
-		svg.text(g2, x, y, "Àà", {
+		svg.text(g2, x, y, "ç±»", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -529,15 +799,15 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - .65 * R * _cos(252 / 180 * PI);
 		y += 5;
-		svg.text(g2, x, y, "ĞÍ", {
+		svg.text(g2, x, y, "å‹", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
 			'transform' : 'rotate(252,' + x + ',' + y + ')'
 		});
 
-		// ·ÖÎöÀàĞÍ
-		//°´²úµØ
+		// åˆ†æç±»å‹
+		// æŒ‰äº§åœ°
 		g3 = svg.group(g, {
 			fill : 'url(#gradient1)',
 			id : 'group3__2__1',
@@ -545,10 +815,10 @@ function drawInitial(svg, settings) {
 			stroke : 'rgba(204,204,204,.3)',
 			display : 'none'
 		});
-		
-		$(g3).click(function(){
-			console.log('°´²úµØ');
-			piemunuDatas['·ÖÎöÀàĞÍ']['°´²úµØ'].click();
+
+		$(g3).click(function() {
+			console.log('æŒ‰äº§åœ°');
+			piemunuDatas['åˆ†æç±»å‹']['æŒ‰äº§åœ°'].click();
 		});
 		path = '';
 		path = path + 'M' + center[0] + ' ' + (center[1] + R);
@@ -567,13 +837,13 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - R * _cos((180 + per / 2) / 180 * PI);
 		y -= 5;
-		svg.text(g3, x, y, "°´²úµØ", {
+		svg.text(g3, x, y, "æŒ‰äº§åœ°", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
 			'transform' : 'rotate(' + (90 + per / 2) + ',' + x + ',' + y + ')'
 		});
-		
+
 		g3 = svg.group(g, {
 			fill : 'url(#gradient1)',
 			id : 'group3__2__2',
@@ -581,10 +851,10 @@ function drawInitial(svg, settings) {
 			stroke : 'rgba(204,204,204,.3)',
 			display : 'none'
 		});
-		
-		$(g3).click(function(){
-			console.log('°´³éÑùÇøÏØ');
-			piemunuDatas['·ÖÎöÀàĞÍ']['°´³éÑùÇøÏØ'].click();
+
+		$(g3).click(function() {
+			console.log('æŒ‰æŠ½æ ·åŒºå¿');
+			piemunuDatas['åˆ†æç±»å‹']['æŒ‰æŠ½æ ·åŒºå¿'].click();
 		});
 
 		path = '';
@@ -607,7 +877,7 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - R * _cos((180 + per / 2 + per) / 180 * PI);
 		y -= 5;
-		svg.text(g3, x, y, "ÇøÏØ", {
+		svg.text(g3, x, y, "åŒºå¿", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -615,21 +885,21 @@ function drawInitial(svg, settings) {
 					+ ')'
 		});
 
-		// Êı¾İÀàĞÍ
+		// æ•°æ®ç±»å‹
 		g = svg.group({
 			fill : 'url(#gradient1)',
 			id : 'group4__1',
 			strokeWidth : 2,
 			stroke : 'rgba(204,204,204,.3)'
 		});
-		g2 = svg.group(g,{
+		g2 = svg.group(g, {
 			fill : 'url(#gradient1)',
 			id : 'group4__2',
 			strokeWidth : 2,
 			stroke : 'rgba(204,204,204,.3)'
 		});
 		path = '';// 'M25 125 L85 125 A40 40 90 0 1 125 85 L125 25 A100 100 90
-					// 0 0 25 125';
+		// 0 0 25 125';
 		path = path + 'M' + (center[0] - R) + ' ' + center[1];
 		path = path + ' L' + (center[0] - r) + ' ' + center[1];
 		path = path + ' A' + r + ' ' + r + ' 90 0 1 ' + center[0] + ' '
@@ -643,7 +913,7 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - .65 * R * _cos(342 / 180 * PI);
 		y += 5;
-		svg.text(g2, x, y, "ĞÍ", {
+		svg.text(g2, x, y, "å‹", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -655,7 +925,7 @@ function drawInitial(svg, settings) {
 		y = center[1] - .65 * R * _cos(324 / 180 * PI);
 		y += 5;
 
-		svg.text(g2, x, y, "Àà", {
+		svg.text(g2, x, y, "ç±»", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -666,7 +936,7 @@ function drawInitial(svg, settings) {
 		y = center[1] - .65 * R * _cos(306 / 180 * PI);
 		y += 5;
 
-		svg.text(g2, x, y, "¾İ", {
+		svg.text(g2, x, y, "æ®", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -676,15 +946,15 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - .65 * R * _cos(288 / 180 * PI);
 		y += 5;
-		svg.text(g2, x, y, "Êı", {
+		svg.text(g2, x, y, "æ•°", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
 			'transform' : 'rotate(288,' + x + ',' + y + ')'
 		});
 
-		// Êı¾İÀàĞÍ->
-		//¼à¶½³é²é
+		// æ•°æ®ç±»å‹->
+		// ç›‘ç£æŠ½æŸ¥
 		g3 = svg.group(g, {
 			fill : 'url(#gradient1)',
 			id : 'group4__2__1',
@@ -692,13 +962,13 @@ function drawInitial(svg, settings) {
 			stroke : 'rgba(204,204,204,.3)',
 			display : 'none'
 		});
-		
-		$(g3).click(function(){
-			console.log('¼à¶½³é²é');
-			piemunuDatas['Êı¾İÀàĞÍ']['¼à¶½³é²é'].click();
+
+		$(g3).click(function() {
+			console.log('ç›‘ç£æŠ½æŸ¥');
+			piemunuDatas['æ•°æ®ç±»å‹']['ç›‘ç£æŠ½æŸ¥'].click();
 		});
 		path = '';// 'M25 125 L85 125 A40 40 90 0 1 125 85 L125 25 A100 100 90
-					// 0 0 25 125';
+		// 0 0 25 125';
 		path = path + 'M' + (center[0] - R) + ' ' + center[1];
 		path = path + ' L' + (center[0] - R - R / 2) + ' ' + center[1];
 		path = path + ' A' + (R + R / 2) + ' ' + (R + R / 2) + ' 22.5 0 1 '
@@ -715,13 +985,13 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - R * 3 / 2 * _cos((270 + per / 2) / 180 * PI);
 		y -= 5;
-		svg.text(g3, x, y, "¼à¶½³é²é", {
+		svg.text(g3, x, y, "ç›‘ç£æŠ½æŸ¥", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
 			'transform' : 'rotate(' + (per / 2) + ',' + x + ',' + y + ')'
 		});
-		//·çÏÕ¼à²â
+		// é£é™©ç›‘æµ‹
 		g3 = svg.group(g, {
 			fill : 'url(#gradient1)',
 			id : 'group4__2__2',
@@ -729,14 +999,14 @@ function drawInitial(svg, settings) {
 			stroke : 'rgba(204,204,204,.3)',
 			display : 'none'
 		});
-		
-		$(g3).click(function(){
-			console.log('·çÏÕ¼à²â');
-			piemunuDatas['Êı¾İÀàĞÍ']['·çÏÕ¼à²â'].click();
+
+		$(g3).click(function() {
+			console.log('é£é™©ç›‘æµ‹');
+			piemunuDatas['æ•°æ®ç±»å‹']['é£é™©ç›‘æµ‹'].click();
 		});
 
 		path = '';// 'M25 125 L85 125 A40 40 90 0 1 125 85 L125 25 A100 100 90
-					// 0 0 25 125';
+		// 0 0 25 125';
 		path = path + 'M' + (center[0] + R * _sin(292.5 / 180 * PI)) + ' '
 				+ (center[1] - R * _cos(292.5 / 180 * PI));
 		path = path + ' L' + (center[0] + (R + R / 2) * _sin(292.5 / 180 * PI))
@@ -756,14 +1026,14 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - R * 3 / 2 * _cos((270 + per / 2 + per) / 180 * PI);
 		y -= 5;
-		svg.text(g3, x, y, " ·çÏÕ¼à²â", {
+		svg.text(g3, x, y, " é£é™©ç›‘æµ‹", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
 			'transform' : 'rotate(' + (per / 2 + per) + ',' + x + ',' + y + ')'
 		});
-		
-		//ÆóÒµ×Ô¼ì
+
+		// ä¼ä¸šè‡ªæ£€
 		g3 = svg.group(g, {
 			fill : 'url(#gradient1)',
 			id : 'group4__2__3',
@@ -771,14 +1041,14 @@ function drawInitial(svg, settings) {
 			stroke : 'rgba(204,204,204,.3)',
 			display : 'none'
 		});
-		
-		$(g3).click(function(){
-			console.log('ÆóÒµ×Ô¼ì');
-			piemunuDatas['Êı¾İÀàĞÍ']['ÆóÒµ×Ô¼ì'].click();
+
+		$(g3).click(function() {
+			console.log('ä¼ä¸šè‡ªæ£€');
+			piemunuDatas['æ•°æ®ç±»å‹']['ä¼ä¸šè‡ªæ£€'].click();
 		});
 
 		path = '';// 'M25 125 L85 125 A40 40 90 0 1 125 85 L125 25 A100 100 90
-					// 0 0 25 125';
+		// 0 0 25 125';
 		path = path + 'M' + (center[0] + R * _sin(315 / 180 * PI)) + ' '
 				+ (center[1] - R * _cos(315 / 180 * PI));
 		path = path + ' L' + (center[0] + (R + R / 2) * _sin(315 / 180 * PI))
@@ -798,15 +1068,15 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - R * 3 / 2 * _cos((270 + per / 2 + per * 2) / 180 * PI);
 		y -= 5;
-		svg.text(g3, x, y, "ÆóÒµ×Ô¼ì", {
+		svg.text(g3, x, y, "ä¼ä¸šè‡ªæ£€", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
 			'transform' : 'rotate(' + (per / 2 + per * 2) + ',' + x + ',' + y
 					+ ')'
 		});
-		
-		//¿ìËÙ¼ì²â
+
+		// å¿«é€Ÿæ£€æµ‹
 		g3 = svg.group(g, {
 			fill : 'url(#gradient1)',
 			id : 'group4__2__4',
@@ -814,14 +1084,14 @@ function drawInitial(svg, settings) {
 			stroke : 'rgba(204,204,204,.3)',
 			display : 'none'
 		});
-		
-		$(g3).click(function(){
-			console.log('¿ìËÙ¼ì²â');
-			piemunuDatas['Êı¾İÀàĞÍ']['¿ìËÙ¼ì²â'].click();
+
+		$(g3).click(function() {
+			console.log('å¿«é€Ÿæ£€æµ‹');
+			piemunuDatas['æ•°æ®ç±»å‹']['å¿«é€Ÿæ£€æµ‹'].click();
 		});
 
 		path = '';// 'M25 125 L85 125 A40 40 90 0 1 125 85 L125 25 A100 100 90
-					// 0 0 25 125';
+		// 0 0 25 125';
 		path = path + 'M' + (center[0] + R * _sin(337.5 / 180 * PI)) + ' '
 				+ (center[1] - R * _cos(337.5 / 180 * PI));
 		path = path + ' L' + (center[0] + (R + R / 2) * _sin(337.5 / 180 * PI))
@@ -841,7 +1111,7 @@ function drawInitial(svg, settings) {
 		x += 5;
 		y = center[1] - R * 3 / 2 * _cos((270 + per / 2 + per * 3) / 180 * PI);
 		y -= 5;
-		svg.text(g3, x, y, "¿ìËÙ¼ì²â", {
+		svg.text(g3, x, y, "å¿«é€Ÿæ£€æµ‹", {
 			fill : 'black',
 			stroke : 'black',
 			'stroke-width' : 1,
@@ -849,7 +1119,7 @@ function drawInitial(svg, settings) {
 					+ ')'
 		});
 
-		// ÖĞĞÄ
+		// ä¸­å¿ƒ
 		g = svg.group({
 			fill : 'url(#gradient1)',
 			id : 'groupd',
@@ -867,15 +1137,15 @@ function drawInitial(svg, settings) {
 					$(this).attr('fill', 'url(#gradient1)').attr('stroke',
 							'rgba(204,204,204,.3)').css('cursor', 'default');
 				}).click(function() {
-					var id = $(this).attr('id');
-					var children = $('g[id^='+id+'__]');
-					if(children.length == 0)
-						return;
-					if ('none' != children.css('display')) {
-						children.css('display', 'none');
-					} else {
-						children.css('display', 'block');
-					}
+			var id = $(this).attr('id');
+			var children = $('g[id^=' + id + '__]');
+			if (children.length == 0)
+				return;
+			if ('none' != children.css('display')) {
+				children.css('display', 'none');
+			} else {
+				children.css('display', 'block');
+			}
 		});
 	};
 
