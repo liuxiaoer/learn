@@ -86,14 +86,14 @@ function drawInitial(svg, settings) {
 		},
 		level1 : {},
 		level2 : {
-			stops : [ [ 0, '#ffffff', 1 ], [ .5, '#FD67FE', 1 ],
-					[ 1, '#ffffff', 1 ] ],
+			stops : [ [ 0, '#EB44FC', 1 ], [ .618, '#EB44FC', 1 ],
+					[ 1, '#6640F5', 1 ] ],
 			stroke : 'rgba(204,204,204,.8)',
 			strokeWidth : 2
 		},
 		level3 : {
-			stops : [ [ 0, 'rgb(204,204,204)', .1 ], [ .5, '#FD67FE', .7 ],
-					[ 1, '#ffffff', .1 ] ]
+			stops : [ [ 0, 'rgb(204,204,204)', .1 ], [ .618, '#EB44FC', .7 ],
+					[ 1, '#6640F5', .1 ] ]
 		}
 	};
 	var _datas = settings.datas;
