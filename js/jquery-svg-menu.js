@@ -86,14 +86,14 @@ function drawInitial(svg, settings) {
 		},
 		level1 : {},
 		level2 : {
-			stops : [ [ 0, '#EB44FC', 1 ], [ .618, '#EB44FC', 1 ],
-					[ 1, '#6640F5', 1 ] ],
+			stops : [ [ 0, '#ffffff', 1 ], [ .5, '#FCFCFC', 1 ],
+					[ 1, '#D8D8D8', 1 ] ],
 			stroke : 'rgba(204,204,204,.8)',
 			strokeWidth : 2
 		},
 		level3 : {
-			stops : [ [ 0, 'rgb(204,204,204)', .1 ], [ .618, '#EB44FC', .7 ],
-					[ 1, '#6640F5', .1 ] ]
+			stops : [ [ 0, 'rgb(204,204,204)', .1 ], [ .5, '#FCFCFC', .7 ],
+					[ 1, '#D8D8D8', .1 ] ]
 		}
 	};
 	var _datas = settings.datas;
@@ -134,9 +134,9 @@ function drawInitial(svg, settings) {
 			stroke : _config.center.stroke
 		});
 		svg.circle(g, center[0], center[1], 30);
-		svg.text(g, center[0] - 15, center[0] + 5, '关闭', {
-			fill : 'black',
-			stroke : 'black',
+		svg.text(g, center[0] - 13, center[0] + 5, '关闭', {
+			fill : '#535353',
+			stroke : '#535353',
 			'stroke-width' : 1
 		});
 		$(g).mouseover(function() {
@@ -235,16 +235,16 @@ function drawInitial(svg, settings) {
 			for ( var v = 0; v < vs; v++) {
 				var sin = _sin(vangel * (v + 1) + angel * i);
 				var cos = _cos(vangel * (v + 1) + angel * i);
-				x = center[0] + R * .6 * sin;
-				y = center[1] - R * .6 * cos;
+				x = center[0] + R * .75 * sin;
+				y = center[1] - R * .75 * cos;
 				var xflag = sin > 0 ? 1 : -1;
 				var yflag = cos > 0 ? -1 : 1;
 
-				svg.text(g2, x, y, value[v], {
-					fill : 'black',
-					stroke : 'black',
+				svg.text(g2, x - 5, y + 5, value[v], {
+					fill : '#535353',
+					stroke : '#535353',
 					'transform' : 'rotate(' + (vangel * (v + 1)) + ','
-							+ (x + 5) + ',' + (y - 5) + ')',
+							+ (x) + ',' + (y) + ')',
 					'stroke-width' : 1
 				});
 			}
@@ -312,14 +312,14 @@ function drawInitial(svg, settings) {
 				value = child.value;
 				// 字
 
-				x = center[0] + (w3 + R) * .7 * _sin(tangel + cangel / 2);
-				y = center[1] - (w3 + R) * .7 * _cos(tangel + cangel / 2);
+				x = center[0] + (w3 + R) * .8 * _sin(tangel + cangel / 2);
+				y = center[1] - (w3 + R) * .8 * _cos(tangel + cangel / 2);
 
-				svg.text(g2, x, y, value, {
-					fill : 'black',
-					stroke : 'black',
+				svg.text(g2, x - 5, y + 5, value, {
+					fill : '#535353',
+					stroke : '#535353',
 					'transform' : 'rotate(' + (tangel + cangel / 2 - 90) + ','
-							+ (x + 5) + ',' + (y - 5) + ')',
+							+ (x) + ',' + (y) + ')',
 					'stroke-width' : 1
 				});
 			}
